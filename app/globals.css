@@ -1,0 +1,331 @@
+@import "tailwindcss";
+
+@theme {
+  /* ── Surfaces (4 níveis de elevação) ── */
+  --color-background:        #050d2b;
+  --color-surface:           #0A1540;
+  --color-surface-elevated:  #0D1A4A;
+  --color-surface-high:      #122259;
+
+  /* ── Borders (3 níveis) ── */
+  --color-border-subtle:     #1A2655;
+  --color-border:            #2C3D7A;
+  --color-border-strong:     #4A5FA0;
+
+  /* ── Texto (primary + 3 muted) ── */
+  --color-text:              #E8E6F0;
+  --color-text-secondary:    #B8C0D9;
+  --color-text-muted:        #8A98C4;
+  --color-text-subtle:       #5C6B96;
+
+  /* ── Dourado (primária) ── */
+  --color-gold:              #FFCC33;
+  --color-gold-light:        #FFD966;
+  --color-gold-active:       #E6B82E;
+  --color-gold-dim:          #806619;
+  --color-gold-deep:         #403310;
+
+  /* ── Azul (secundária) ── */
+  --color-blue:              #4477FF;
+  --color-blue-light:        #6B92FF;
+  --color-blue-active:       #3A66E6;
+  --color-blue-dim:          #2C4E99;
+  --color-blue-deep:         #15264D;
+
+  /* ── Status (institucionais) ── */
+  --color-success:           #6BB07F;
+  --color-error:             #C24A4A;
+  --color-warning:           #E89B4D;
+
+  /* ── Fontes ── */
+  --font-display: "Italiana", "Cormorant Garamond", Georgia, serif;
+  --font-serif:   "Cormorant Garamond", Georgia, serif;
+  --font-body:    "Inter", system-ui, -apple-system, "Segoe UI", sans-serif;
+}
+
+/* ── Base ── */
+html {
+  /* Tema escuro: controles nativos (scrollbar, campos) renderizam em dark */
+  color-scheme: dark;
+  scroll-behavior: smooth;
+}
+
+html, body {
+  background: var(--color-background);
+  color: var(--color-text);
+  font-family: var(--font-body);
+  font-weight: 400;
+  font-style: normal;
+  font-feature-settings: "cv11", "ss01", "tnum";
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+/* Garantir que NADA do site renderize em itálico */
+em, i, address, cite, dfn, var {
+  font-style: normal;
+}
+
+/* ── Acessibilidade: foco visível por teclado em toda a navegação ── */
+:focus-visible {
+  outline: 2px solid var(--color-gold);
+  outline-offset: 2px;
+}
+
+/* Âncoras de seção não ficam escondidas sob a navbar fixa (76px) */
+section[id] {
+  scroll-margin-top: 92px;
+}
+
+/* ── Atmospheric background — gradient mesh ── */
+.atmosphere {
+  position: fixed;
+  inset: 0;
+  z-index: 0;
+  pointer-events: none;
+  background:
+    radial-gradient(ellipse 80% 60% at 50% 0%, rgba(255, 204, 51, 0.08) 0%, transparent 60%),
+    radial-gradient(ellipse 60% 80% at 20% 50%, rgba(68, 119, 255, 0.06) 0%, transparent 70%),
+    radial-gradient(ellipse 70% 70% at 80% 70%, rgba(255, 204, 51, 0.05) 0%, transparent 65%),
+    radial-gradient(ellipse 100% 100% at 50% 100%, rgba(10, 21, 64, 0.5) 0%, transparent 70%);
+}
+
+/* ── Vignette ── */
+.vignette {
+  position: fixed;
+  inset: 0;
+  z-index: 1;
+  pointer-events: none;
+  background: radial-gradient(ellipse 140% 100% at 50% 50%, transparent 40%, rgba(0, 0, 0, 0.6) 100%);
+}
+
+/* ── Film grain — SVG noise texture ── */
+.grain {
+  position: fixed;
+  inset: 0;
+  z-index: 2;
+  pointer-events: none;
+  opacity: 0.05;
+  /* mix-blend-mode removido: forçava re-mistura da tela inteira a cada frame de scroll */
+  background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='300' height='300'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='2' stitchTiles='stitch'/><feColorMatrix values='0 0 0 0 1.0 0 0 0 0 0.80 0 0 0 0 0.20 0 0 0 0.5 0'/></filter><rect width='100%25' height='100%25' filter='url(%23n)'/></svg>");
+}
+
+/* ── Light rays from above ── */
+.light-rays {
+  position: fixed;
+  top: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 120%;
+  height: 80vh;
+  z-index: 1;
+  pointer-events: none;
+  background:
+    conic-gradient(from 180deg at 50% -10%,
+      transparent 0deg,
+      rgba(255, 204, 51, 0.05) 2deg,
+      transparent 6deg,
+      transparent 15deg,
+      rgba(255, 204, 51, 0.04) 17deg,
+      transparent 22deg,
+      transparent 170deg,
+      rgba(255, 204, 51, 0.05) 172deg,
+      transparent 178deg,
+      transparent 190deg);
+  opacity: 0.7;
+}
+
+/* ── Shimmer dust particles ── */
+@keyframes shimmer-float {
+  0% {
+    transform: translateY(100vh) translateX(0) scale(0);
+    opacity: 0;
+  }
+  8% {
+    opacity: 1;
+  }
+  92% {
+    opacity: 0.4;
+  }
+  100% {
+    transform: translateY(-10vh) translateX(20px) scale(1);
+    opacity: 0;
+  }
+}
+
+@keyframes shimmer-pulse {
+  0%, 100% { opacity: 0.4; }
+  50% { opacity: 1; }
+}
+
+.shimmer {
+  position: fixed;
+  background: var(--color-gold-light);
+  border-radius: 50%;
+  pointer-events: none;
+  animation: shimmer-float linear infinite, shimmer-pulse 3s ease-in-out infinite;
+  animation-fill-mode: both;
+  will-change: transform, opacity;
+  z-index: 3;
+  box-shadow: 0 0 6px var(--color-gold-light);
+}
+
+/* ── Decorative art deco corner ornaments ── */
+.ornament-corner {
+  position: absolute;
+  width: 80px;
+  height: 80px;
+  pointer-events: none;
+  opacity: 0.35;
+}
+
+.ornament-corner::before,
+.ornament-corner::after {
+  content: "";
+  position: absolute;
+  background: var(--color-gold);
+}
+
+.ornament-corner.tl::before { top: 0; left: 0; width: 1px; height: 100%; }
+.ornament-corner.tl::after { top: 0; left: 0; width: 100%; height: 1px; }
+.ornament-corner.tr::before { top: 0; right: 0; width: 1px; height: 100%; }
+.ornament-corner.tr::after { top: 0; right: 0; width: 100%; height: 1px; }
+.ornament-corner.bl::before { bottom: 0; left: 0; width: 1px; height: 100%; }
+.ornament-corner.bl::after { bottom: 0; left: 0; width: 100%; height: 1px; }
+.ornament-corner.br::before { bottom: 0; right: 0; width: 1px; height: 100%; }
+.ornament-corner.br::after { bottom: 0; right: 0; width: 100%; height: 1px; }
+
+/* ── Gold glow search bar ── */
+@keyframes search-breathe {
+  0%, 100% {
+    box-shadow:
+      0 0 0 1px rgba(128, 102, 25, 0.4),
+      0 0 30px rgba(255, 204, 51, 0.08),
+      0 8px 40px rgba(0, 0, 0, 0.6);
+  }
+  50% {
+    box-shadow:
+      0 0 0 1px rgba(255, 204, 51, 0.6),
+      0 0 40px rgba(255, 204, 51, 0.18),
+      0 8px 50px rgba(0, 0, 0, 0.8);
+  }
+}
+
+.search-frame {
+  animation: search-breathe 4s ease-in-out infinite;
+}
+
+.search-frame:focus-within {
+  animation-duration: 2s;
+}
+
+/* ── Entrance animations ── */
+@keyframes reveal-up {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes reveal-fade {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+@keyframes reveal-expand {
+  from {
+    opacity: 0;
+    transform: scaleX(0);
+  }
+  to {
+    opacity: 1;
+    transform: scaleX(1);
+  }
+}
+
+.reveal-up { animation: reveal-up 0.9s cubic-bezier(0.16, 1, 0.3, 1) both; }
+.reveal-fade { animation: reveal-fade 1.2s ease-out both; }
+.reveal-expand {
+  animation: reveal-expand 1s cubic-bezier(0.16, 1, 0.3, 1) both;
+  transform-origin: center;
+}
+
+.delay-1 { animation-delay: 0.1s; }
+.delay-2 { animation-delay: 0.25s; }
+.delay-3 { animation-delay: 0.4s; }
+.delay-4 { animation-delay: 0.55s; }
+.delay-5 { animation-delay: 0.7s; }
+.delay-6 { animation-delay: 0.85s; }
+
+/* ── Stagger for result cards ── */
+.stagger-children > * {
+  opacity: 0;
+  animation: reveal-up 0.6s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+
+.stagger-children > *:nth-child(1) { animation-delay: 0.04s; }
+.stagger-children > *:nth-child(2) { animation-delay: 0.08s; }
+.stagger-children > *:nth-child(3) { animation-delay: 0.12s; }
+.stagger-children > *:nth-child(4) { animation-delay: 0.16s; }
+.stagger-children > *:nth-child(5) { animation-delay: 0.20s; }
+.stagger-children > *:nth-child(6) { animation-delay: 0.24s; }
+.stagger-children > *:nth-child(7) { animation-delay: 0.28s; }
+.stagger-children > *:nth-child(8) { animation-delay: 0.32s; }
+.stagger-children > *:nth-child(9) { animation-delay: 0.36s; }
+.stagger-children > *:nth-child(10) { animation-delay: 0.40s; }
+
+/* ── Scrollbar styling ── */
+::-webkit-scrollbar {
+  width: 6px;
+  height: 6px;
+}
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+::-webkit-scrollbar-thumb {
+  background: var(--color-gold-deep);
+  border-radius: 3px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: var(--color-gold-dim);
+}
+
+/* ── Selection ── */
+::selection {
+  background: var(--color-gold);
+  color: var(--color-background);
+}
+
+/* ── Divider utility ── */
+.divider-gold {
+  height: 1px;
+  background: linear-gradient(90deg, transparent, var(--color-gold) 50%, transparent);
+}
+
+/* ── Art deco diamond bullet ── */
+.diamond {
+  display: inline-block;
+  width: 4px;
+  height: 4px;
+  background: var(--color-gold);
+  transform: rotate(45deg);
+  vertical-align: middle;
+}
+
+/* ── Acessibilidade + performance: respeitar quem prefere menos movimento ── */
+@media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior: auto; }
+  .shimmer { display: none; }
+  .search-frame { animation: none; }
+  .reveal-up,
+  .reveal-fade,
+  .reveal-expand,
+  .stagger-children > * {
+    animation-duration: 0.01ms !important;
+    animation-delay: 0s !important;
+  }
+}

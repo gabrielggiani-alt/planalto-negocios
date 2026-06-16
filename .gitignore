@@ -1,0 +1,27 @@
+# Dependencies
+node_modules/
+
+# Next.js
+.next/
+out/
+
+# Environment
+.env
+.env.local
+.env.*.local
+
+# Claude Code internals
+.claude/
+.superpowers/
+CLAUDE.md
+
+# Notas internas — não publicar
+PENDENCIAS.md
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Logs
+*.log
+npm-debug.log*
