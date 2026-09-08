@@ -17,6 +17,9 @@ CLAUDE.md
 
 # Notas internas — não publicar
 PENDENCIAS.md
+PONTOS-DE-ATENCAO.md
+MENSAGEM-PADRASTO.md
+PROMPT-FABLE5.md
 
 # OS
 .DS_Store
@@ -25,3 +28,6 @@ Thumbs.db
 # Logs
 *.log
 npm-debug.log*
+
+# TypeScript incremental build info
+*.tsbuildinfo
