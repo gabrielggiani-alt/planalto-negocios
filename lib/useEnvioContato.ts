@@ -4,25 +4,49 @@ import { useState } from "react";
 
 export type StatusEnvio = "idle" | "submitting" | "ok";
 
+export type DadosContato = {
+  nome?: string;
+  email: string;
+  telefone?: string;
+  mensagem?: string;
+  servico?: string;
+  /** Honeypot anti-spam (campo escondido). */
+  website?: string;
+};
+
 /**
- * Gerencia o envio dos formulários de contato (estado + abertura do mailto).
- * Recebe uma função que monta a URL `mailto:`, chamada após um pequeno atraso
- * que dá o feedback de "Enviando" ao visitante.
+ * Gerencia o envio dos formulários de contato.
  *
- * Observação: hoje o envio é via `mailto:` (abre o app de e-mail do visitante).
- * Quando definirmos um serviço de e-mail / back-end de verdade, basta trocar o
- * corpo de `enviar` aqui — os formulários não mudam.
+ * Tenta primeiro o envio real via `POST /api/contato` (que usa um serviço de
+ * e-mail quando configurado). Se a API ainda não estiver configurada (responde
+ * 501) ou falhar, cai no `fallback` — hoje um `mailto:` que abre o app de e-mail
+ * do visitante. Assim o formulário funciona já, e "liga" o envio de verdade
+ * automaticamente quando o serviço de e-mail for configurado no deploy.
  */
 export function useEnvioContato() {
   const [status, setStatus] = useState<StatusEnvio>("idle");
 
-  function enviar(construirMailto: () => string) {
+  async function enviar(dados: DadosContato, fallbackMailto: () => string) {
     if (status === "submitting") return;
     setStatus("submitting");
-    setTimeout(() => {
-      setStatus("ok");
-      window.location.href = construirMailto();
-    }, 350);
+
+    try {
+      const res = await fetch("/api/contato", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(dados),
+      });
+      if (res.ok) {
+        setStatus("ok");
+        return;
+      }
+    } catch {
+      // rede indisponível → cai no fallback abaixo
+    }
+
+    // Fallback: abre o app de e-mail do visitante (comportamento atual).
+    setStatus("ok");
+    window.location.href = fallbackMailto();
   }
 
   return { status, enviar };

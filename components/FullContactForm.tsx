@@ -8,17 +8,27 @@ import { empresa } from "@/lib/empresa";
 
 type Fields = { nome: string; email: string; telefone: string; mensagem: string };
 
-export default function FullContactForm() {
+/**
+ * Formulário de contato completo.
+ * Se `servico` for informado (páginas de serviço), o envio é marcado com o
+ * serviço escolhido — no assunto e no corpo do e-mail — e um selo é exibido.
+ */
+export default function FullContactForm({ servico }: { servico?: string } = {}) {
   const [fields, setFields] = useState<Fields>({ nome: "", email: "", telefone: "", mensagem: "" });
+  const [website, setWebsite] = useState(""); // honeypot anti-spam (fica escondido)
   const { status, enviar } = useEnvioContato();
 
   function handleSubmit(e: React.FormEvent) {
     e.preventDefault();
-    enviar(() => {
+    enviar({ ...fields, servico, website }, () => {
       const body = encodeURIComponent(
-        `Nome: ${fields.nome}\nTelefone: ${fields.telefone || "Não informado"}\n\nMensagem:\n${fields.mensagem}`
+        `${servico ? `Serviço de interesse: ${servico}\n\n` : ""}` +
+          `Nome: ${fields.nome}\nTelefone: ${fields.telefone || "Não informado"}\n\nMensagem:\n${fields.mensagem}`
       );
-      return `mailto:${empresa.email}?subject=${encodeURIComponent(`Contato — ${fields.nome}`)}&body=${body}`;
+      const subject = servico
+        ? `Solicitação de serviço — ${servico}`
+        : `Contato — ${fields.nome}`;
+      return `mailto:${empresa.email}?subject=${encodeURIComponent(subject)}&body=${body}`;
     });
   }
 
@@ -30,8 +40,12 @@ export default function FullContactForm() {
   if (status === "ok") {
     return (
       <ContatoEnviado
-        titulo="Mensagem recebida"
-        descricao="Nossa equipe retornará em breve pelo e-mail ou telefone informados."
+        titulo={servico ? "Solicitação recebida" : "Mensagem recebida"}
+        descricao={
+          servico
+            ? `Recebemos seu interesse em ${servico}. Nossa equipe retornará em breve pelo e-mail ou telefone informados.`
+            : "Nossa equipe retornará em breve pelo e-mail ou telefone informados."
+        }
       />
     );
   }
@@ -41,7 +55,32 @@ export default function FullContactForm() {
   const labelClass = "block text-[11px] tracking-[0.35em] uppercase text-gold mb-2.5";
 
   return (
-    <form onSubmit={handleSubmit} className="space-y-6" aria-label="Formulário de contato">
+    <form
+      onSubmit={handleSubmit}
+      className="space-y-6"
+      aria-label={servico ? `Solicitar ${servico}` : "Formulário de contato"}
+    >
+      {/* Honeypot anti-spam: escondido de humanos, bots preenchem. */}
+      <input
+        type="text"
+        name="website"
+        tabIndex={-1}
+        autoComplete="off"
+        aria-hidden="true"
+        value={website}
+        onChange={(e) => setWebsite(e.target.value)}
+        className="hidden"
+      />
+      {servico && (
+        <div className="flex items-center gap-3 border border-gold-deep/60 bg-gold/5 px-4 py-3">
+          <span className="w-1.5 h-1.5 bg-gold rotate-45 shrink-0" aria-hidden="true" />
+          <p className="text-[13px] text-text-secondary">
+            Serviço de interesse:{" "}
+            <span className="text-gold tracking-wide">{servico}</span>
+          </p>
+        </div>
+      )}
+
       <div className="grid sm:grid-cols-2 gap-6">
         <div>
           <label htmlFor="fc-nome" className={labelClass}>Nome completo</label>
@@ -93,7 +132,11 @@ export default function FullContactForm() {
           id="fc-mensagem"
           required
           rows={5}
-          placeholder="Descreva sua necessidade ou dúvida..."
+          placeholder={
+            servico
+              ? "Conte sua situação: valor pretendido, tipo de benefício/órgão, prazo desejado…"
+              : "Descreva sua necessidade ou dúvida…"
+          }
           value={fields.mensagem}
           onChange={update("mensagem")}
           disabled={status === "submitting"}
@@ -104,9 +147,15 @@ export default function FullContactForm() {
       <button
         type="submit"
         disabled={status === "submitting"}
-        className="group inline-flex items-center justify-center gap-3 px-8 py-4 bg-gold text-background text-[12px] tracking-[0.3em] uppercase hover:bg-gold-light transition-colors disabled:opacity-60 disabled:cursor-not-allowed"
+        className="group inline-flex items-center justify-center gap-3 px-8 py-4 btn-primary text-[12px] tracking-[0.3em] uppercase"
       >
-        <span>{status === "submitting" ? "Enviando..." : "Enviar Mensagem"}</span>
+        <span>
+          {status === "submitting"
+            ? "Enviando…"
+            : servico
+              ? "Enviar Solicitação"
+              : "Enviar Mensagem"}
+        </span>
         <ArrowUpRightIcon
           size={14}
           className="group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-transform"

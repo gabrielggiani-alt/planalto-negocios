@@ -14,6 +14,7 @@ export default function ContactForm() {
     e.preventDefault();
     if (!email.trim()) return;
     enviar(
+      { email, mensagem: "Gostaria de mais informações." },
       () =>
         `mailto:${empresa.email}?subject=Contato%20-%20Planalto%20Neg%C3%B3cios&body=Olá,%20meu%20e-mail%20é%20${encodeURIComponent(
           email
@@ -53,7 +54,7 @@ export default function ContactForm() {
       <button
         type="submit"
         disabled={status === "submitting"}
-        className="group inline-flex items-center justify-center gap-2 px-7 py-3.5 bg-gold text-background text-[12px] tracking-[0.3em] uppercase hover:bg-gold-light transition-colors disabled:opacity-60 disabled:cursor-not-allowed"
+        className="group inline-flex items-center justify-center gap-2 px-7 py-3.5 btn-primary text-[12px] tracking-[0.3em] uppercase"
       >
         <span>{status === "submitting" ? "Enviando" : "Enviar"}</span>
         <ArrowUpRightIcon size={14} className="group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-transform" />
