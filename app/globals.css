@@ -77,6 +77,23 @@ section[id] {
   scroll-margin-top: 92px;
 }
 
+/* ── Botão primário (CTA): dourado fosco/champanhe, sofisticado (sem brilho) ── */
+.btn-primary {
+  background-image: linear-gradient(135deg, #E4D3A2, #C9AF70);
+  color: #050d2b;
+  box-shadow: 0 6px 18px rgba(0, 0, 0, 0.3);
+  transition: filter 220ms ease, box-shadow 220ms ease;
+}
+.btn-primary:hover {
+  filter: brightness(1.06);
+  box-shadow: 0 8px 22px rgba(0, 0, 0, 0.36);
+}
+.btn-primary:disabled {
+  filter: none;
+  opacity: 0.6;
+  cursor: not-allowed;
+}
+
 /* ── Atmospheric background — gradient mesh ── */
 .atmosphere {
   position: fixed;

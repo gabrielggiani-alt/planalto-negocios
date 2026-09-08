@@ -50,7 +50,12 @@ export default function DocumentoViewer({
       />
 
       {/* Modal */}
-      <div className="relative w-[95vw] h-[92vh] max-w-7xl bg-surface border border-border rounded-xl overflow-hidden shadow-2xl flex flex-col">
+      <div
+        role="dialog"
+        aria-modal="true"
+        aria-label={documento.nome}
+        className="relative w-[95vw] h-[92vh] max-w-7xl bg-surface border border-border rounded-xl overflow-hidden shadow-2xl flex flex-col"
+      >
         {/* Header */}
         <div className="flex items-center justify-between px-6 py-4 border-b border-border bg-surface/90">
           <div className="flex items-center gap-3">
@@ -74,6 +79,7 @@ export default function DocumentoViewer({
             {/* Close button */}
             <button
               onClick={onClose}
+              aria-label="Fechar"
               className="w-9 h-9 flex items-center justify-center rounded-lg border border-border text-text-muted hover:text-gold hover:border-gold/40 transition-colors"
             >
               <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">

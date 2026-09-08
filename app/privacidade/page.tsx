@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import LegalLayout from "@/components/LegalLayout";
-import { empresa, emailHref, enderecoCompleto } from "@/lib/empresa";
+import { empresa, emailHref, enderecoCompleto, bancosParceiros } from "@/lib/empresa";
 
 export const metadata: Metadata = {
   title: "Política de Privacidade — Planalto Negócios",
@@ -15,7 +15,6 @@ export const metadata: Metadata = {
  * Campos entre [colchetes] devem ser confirmados pela empresa:
  *  - contato do Encarregado (DPO)
  *  - prazos de retenção específicos
- *  - lista de instituições financeiras parceiras
  */
 export default function PrivacidadePage() {
   return (
@@ -78,9 +77,9 @@ export default function PrivacidadePage() {
       <h2>6. Compartilhamento</h2>
       <p>
         Seus dados podem ser compartilhados com <strong>instituições
-        financeiras parceiras</strong> para viabilizar a operação contratada e
-        com autoridades quando exigido por lei. Não vendemos dados pessoais.
-        [Confirmar a relação de instituições parceiras.]
+        financeiras parceiras</strong> — atualmente {bancosParceiros.join(", ")} —
+        para viabilizar a operação contratada, e com autoridades quando exigido
+        por lei. Não vendemos dados pessoais.
       </p>
 
       <h2>7. Armazenamento e segurança</h2>

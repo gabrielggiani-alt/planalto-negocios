@@ -61,7 +61,7 @@ export default function LoginForm({ from = "" }: { from?: string }) {
       <button
         type="submit"
         disabled={pending}
-        className="group w-full inline-flex items-center justify-center gap-3 px-8 py-4 bg-gold text-background text-[12px] tracking-[0.3em] uppercase hover:bg-gold-light transition-colors disabled:opacity-60 disabled:cursor-not-allowed"
+        className="group w-full inline-flex items-center justify-center gap-3 px-8 py-4 btn-primary text-[12px] tracking-[0.3em] uppercase"
       >
         <span>{pending ? "Entrando..." : "Entrar"}</span>
         <ArrowUpRightIcon

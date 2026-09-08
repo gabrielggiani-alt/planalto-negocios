@@ -5,11 +5,14 @@ import Footer from "@/components/Footer";
 import Particles from "@/components/Particles";
 import ContactForm from "@/components/ContactForm";
 import ServiceCard from "@/components/ServiceCard";
+import { SERVICOS } from "@/lib/servicos";
 import {
   ShieldIcon,
   EnvelopeIcon,
   ChevronRightIcon,
 } from "@/components/Icons";
+
+const ALGARISMOS = ["I", "II", "III", "IV", "V"];
 
 export default function Home() {
   return (
@@ -77,7 +80,7 @@ function Hero() {
           <div className="flex flex-col sm:flex-row gap-4 pt-2 reveal-up delay-5">
             <Link
               href="/contato"
-              className="group inline-flex items-center justify-center gap-3 px-8 py-4 bg-gold text-background text-[12px] tracking-[0.3em] uppercase hover:bg-gold-light transition-colors"
+              className="group inline-flex items-center justify-center gap-3 px-8 py-4 btn-primary text-[12px] tracking-[0.3em] uppercase"
             >
               <span>Fale Conosco</span>
               <EnvelopeIcon size={16} />
@@ -151,33 +154,6 @@ function SectionEyebrow({ label }: { label: string }) {
 }
 
 function Services() {
-  const SERVICES = [
-    {
-      number: "01",
-      href: "/servicos#consignado-inss",
-      title: "Consignado INSS",
-      description:
-        "Crédito consignado para aposentados e pensionistas do INSS, com taxas competitivas e atendimento personalizado em todas as etapas.",
-      icon: <ServiceMark>I</ServiceMark>,
-    },
-    {
-      number: "02",
-      href: "/servicos#consignado-publico",
-      title: "Consignado Público",
-      description:
-        "Operações para servidores públicos federais, estaduais e municipais, com averbação direta em folha e processo simplificado.",
-      icon: <ServiceMark>II</ServiceMark>,
-    },
-    {
-      number: "03",
-      href: "/servicos#correspondente-bancario",
-      title: "Correspondente Bancário",
-      description:
-        "Atuamos como correspondente dos principais bancos do mercado, oferecendo soluções de crédito consignado adaptadas ao seu perfil.",
-      icon: <ServiceMark>III</ServiceMark>,
-    },
-  ];
-
   return (
     <section
       id="servicos"
@@ -195,8 +171,15 @@ function Services() {
         </header>
 
         <div className="grid md:grid-cols-3 gap-6 lg:gap-8">
-          {SERVICES.map((s) => (
-            <ServiceCard key={s.number} {...s} />
+          {SERVICOS.map((s, i) => (
+            <ServiceCard
+              key={s.slug}
+              number={s.numero}
+              href={`/servicos/${s.slug}`}
+              title={s.titulo}
+              description={s.resumo}
+              icon={<ServiceMark>{ALGARISMOS[i]}</ServiceMark>}
+            />
           ))}
         </div>
 
@@ -276,8 +259,8 @@ function AntiFraud() {
 function About() {
   const STATS = [
     { value: "20+", label: "Anos de mercado" },
-    { value: "352", label: "Clientes ativos" },
-    { value: "5+", label: "Bancos parceiros" },
+    { value: "5.000+", label: "Clientes atendidos/ano" },
+    { value: "4", label: "Bancos parceiros" },
   ];
 
   return (

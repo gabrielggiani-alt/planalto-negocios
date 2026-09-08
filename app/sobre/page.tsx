@@ -13,15 +13,16 @@ export const metadata: Metadata = {
 
 /*
  * PLACEHOLDERS pendentes do proprietário (preencher quando o padrasto enviar):
- *  - [Nome do proprietário] — usado na seção "Liderança".
+ *  - [Nome do proprietário] — usado na seção "Liderança". Resposta recebida foi a
+ *    razão social ("Planalto Negócios e Serviços Ltda."), não um nome de pessoa —
+ *    confirmar se é isso mesmo que deve aparecer aqui.
  *  - Fotos do escritório/equipe — substituir os blocos de placeholder por <Image>.
- * Estatísticas (352 clientes, 5+ bancos) ainda A CONFIRMAR com o proprietário.
  */
 
 const STATS = [
   { value: "20+", label: "Anos de mercado" },
-  { value: "352", label: "Clientes ativos" },
-  { value: "5+", label: "Bancos parceiros" },
+  { value: "5.000+", label: "Clientes atendidos/ano" },
+  { value: "4", label: "Bancos parceiros" },
 ];
 
 const VALORES = [
@@ -258,7 +259,7 @@ export default function SobrePage() {
             <div className="flex flex-col sm:flex-row gap-4 justify-center">
               <Link
                 href="/contato"
-                className="inline-flex items-center justify-center gap-3 px-8 py-4 bg-gold text-background text-[12px] tracking-[0.3em] uppercase hover:bg-gold-light transition-colors"
+                className="inline-flex items-center justify-center gap-3 px-8 py-4 btn-primary text-[12px] tracking-[0.3em] uppercase"
               >
                 <span>Fale Conosco</span>
                 <ChevronRightIcon size={14} />

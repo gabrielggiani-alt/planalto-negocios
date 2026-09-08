@@ -256,7 +256,7 @@ export default function SegurancaPage() {
             </p>
             <Link
               href="/contato"
-              className="inline-flex items-center justify-center gap-3 px-8 py-4 bg-gold text-background text-[12px] tracking-[0.3em] uppercase hover:bg-gold-light transition-colors"
+              className="inline-flex items-center justify-center gap-3 px-8 py-4 btn-primary text-[12px] tracking-[0.3em] uppercase"
             >
               <span>Fale Conosco</span>
               <ChevronRightIcon size={14} />

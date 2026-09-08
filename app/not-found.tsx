@@ -50,7 +50,7 @@ export default function NotFound() {
           <div className="flex flex-col sm:flex-row gap-4 justify-center pt-2">
             <Link
               href="/"
-              className="inline-flex items-center justify-center gap-3 px-8 py-4 bg-gold text-background text-[12px] tracking-[0.3em] uppercase hover:bg-gold-light transition-colors"
+              className="inline-flex items-center justify-center gap-3 px-8 py-4 btn-primary text-[12px] tracking-[0.3em] uppercase"
             >
               <span>Voltar ao início</span>
               <ChevronRightIcon size={14} />

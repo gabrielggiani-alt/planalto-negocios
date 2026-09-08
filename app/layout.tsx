@@ -1,10 +1,46 @@
-import type { Metadata } from "next";
+import type { Metadata, Viewport } from "next";
 import "./globals.css";
+import { siteUrl } from "@/lib/site";
+
+const titulo = "Planalto Negócios — Crédito Consignado em Brasília";
+const descricao =
+  "Correspondente bancário dos principais bancos do mercado. Crédito consignado para aposentados, pensionistas e servidores públicos. Brasília-DF desde 2003.";
 
 export const metadata: Metadata = {
-  title: "Planalto Negócios — Crédito Consignado em Brasília",
-  description:
-    "Correspondente bancário dos principais bancos do mercado. Crédito consignado para aposentados, pensionistas e servidores públicos. Brasília-DF desde 2003.",
+  metadataBase: new URL(siteUrl),
+  title: titulo,
+  description: descricao,
+  applicationName: "Planalto Negócios",
+  alternates: {
+    canonical: "/",
+  },
+  keywords: [
+    "crédito consignado",
+    "consignado INSS",
+    "consignado servidor público",
+    "correspondente bancário",
+    "empréstimo consignado",
+    "Brasília",
+    "Planalto Negócios",
+  ],
+  openGraph: {
+    type: "website",
+    locale: "pt_BR",
+    siteName: "Planalto Negócios",
+    url: siteUrl,
+    title: titulo,
+    description: descricao,
+    // A imagem (og:image + twitter:image) vem de app/opengraph-image.tsx.
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: titulo,
+    description: descricao,
+  },
+  robots: {
+    index: true,
+    follow: true,
+  },
   icons: {
     icon: [
       { url: "/favicon-16x16.png", sizes: "16x16", type: "image/png" },
@@ -12,6 +48,11 @@ export const metadata: Metadata = {
     ],
     apple: "/apple-touch-icon.png",
   },
+};
+
+export const viewport: Viewport = {
+  themeColor: "#050d2b",
+  colorScheme: "dark",
 };
 
 export default function RootLayout({

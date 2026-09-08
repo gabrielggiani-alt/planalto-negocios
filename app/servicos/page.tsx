@@ -3,7 +3,9 @@ import Link from "next/link";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import Particles from "@/components/Particles";
+import ScrollToHash from "@/components/ScrollToHash";
 import { ChevronRightIcon, ShieldIcon } from "@/components/Icons";
+import { SERVICOS } from "@/lib/servicos";
 
 export const metadata: Metadata = {
   title: "Serviços — Planalto Negócios",
@@ -11,60 +13,10 @@ export const metadata: Metadata = {
     "Crédito consignado para aposentados, pensionistas e servidores públicos. Correspondente bancário em Brasília-DF.",
 };
 
-const SERVICOS = [
-  {
-    numero: "01",
-    slug: "consignado-inss",
-    titulo: "Consignado INSS",
-    subtitulo: "Para aposentados e pensionistas",
-    descricao:
-      "Modalidade de crédito com desconto direto no benefício do INSS. Ideal para aposentados e pensionistas que buscam taxas diferenciadas e processo sem burocracia.",
-    itens: [
-      "Desconto automático no benefício mensal",
-      "Prazo de pagamento estendido",
-      "Taxas regulamentadas pelo Banco Central",
-      "Sem necessidade de comprovante de renda adicional",
-      "Atendimento personalizado em todas as etapas",
-    ],
-    publico: "Aposentados e pensionistas do INSS",
-  },
-  {
-    numero: "02",
-    slug: "consignado-publico",
-    titulo: "Consignado Público",
-    subtitulo: "Para servidores públicos",
-    descricao:
-      "Crédito consignado para servidores públicos federais, estaduais e municipais. O desconto é feito diretamente em folha de pagamento, com taxas diferenciadas.",
-    itens: [
-      "Desconto em folha de pagamento",
-      "Averbação direta no RH do órgão",
-      "Taxas diferenciadas para servidores",
-      "Processo simplificado e rápido",
-      "Atende municípios, estados e governo federal",
-    ],
-    publico: "Servidores públicos federais, estaduais e municipais",
-  },
-  {
-    numero: "03",
-    slug: "correspondente-bancario",
-    titulo: "Correspondente Bancário",
-    subtitulo: "Parceiro dos principais bancos",
-    descricao:
-      "Atuamos como correspondente autorizado dos principais bancos do mercado, oferecendo acesso às melhores condições de crédito consignado de forma direta e transparente.",
-    itens: [
-      "Acesso a múltiplos bancos em um único atendimento",
-      "Comparativo das melhores condições disponíveis",
-      "Sem custo adicional ao cliente",
-      "Operações autorizadas pelo Banco Central",
-      "Mais de 20 anos de relacionamento com o mercado",
-    ],
-    publico: "Aposentados, pensionistas e servidores em geral",
-  },
-];
-
 export default function ServicosPage() {
   return (
     <>
+      <ScrollToHash />
       <Navbar />
 
       <main className="relative overflow-hidden pt-[76px]">
@@ -130,6 +82,13 @@ export default function ServicosPage() {
                         </h2>
                       </div>
                       <p className="text-text-secondary text-[15px] leading-relaxed">{s.descricao}</p>
+                      <Link
+                        href={`/servicos/${s.slug}`}
+                        className="group inline-flex items-center justify-center gap-3 px-7 py-3.5 btn-primary text-[11px] tracking-[0.3em] uppercase"
+                      >
+                        <span>Solicitar este serviço</span>
+                        <ChevronRightIcon size={14} className="group-hover:translate-x-1 transition-transform" />
+                      </Link>
                     </div>
 
                     <div className="lg:col-span-6">
@@ -206,7 +165,7 @@ export default function ServicosPage() {
             </p>
             <Link
               href="/contato"
-              className="inline-flex items-center justify-center gap-3 px-8 py-4 bg-gold text-background text-[12px] tracking-[0.3em] uppercase hover:bg-gold-light transition-colors"
+              className="inline-flex items-center justify-center gap-3 px-8 py-4 btn-primary text-[12px] tracking-[0.3em] uppercase"
             >
               <span>Fale Conosco</span>
               <ChevronRightIcon size={14} />

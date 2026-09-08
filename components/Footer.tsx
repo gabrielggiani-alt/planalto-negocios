@@ -1,7 +1,7 @@
 import Link from "next/link";
 import Logo from "./Logo";
-import { EnvelopeIcon, InstagramIcon, ArrowUpRightIcon } from "./Icons";
-import { empresa, emailHref, instagramUrl } from "@/lib/empresa";
+import { EnvelopeIcon, InstagramIcon, PhoneIcon, ArrowUpRightIcon } from "./Icons";
+import { empresa, emailHref, telefoneHref, instagramUrl } from "@/lib/empresa";
 
 const NAV_LINKS = [
   { href: "/", label: "Início" },
@@ -63,6 +63,15 @@ export default function Footer() {
           </h3>
 
           <ul className="space-y-4">
+            <li>
+              <a
+                href={telefoneHref}
+                className="group inline-flex items-center gap-3 text-text-secondary text-[13px] hover:text-gold transition-colors"
+              >
+                <PhoneIcon size={18} className="text-gold-dim group-hover:text-gold transition-colors shrink-0" />
+                <span>{empresa.telefone}</span>
+              </a>
+            </li>
             <li>
               <a
                 href={emailHref}

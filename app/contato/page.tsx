@@ -3,8 +3,8 @@ import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import Particles from "@/components/Particles";
 import FullContactForm from "@/components/FullContactForm";
-import { EnvelopeIcon, InstagramIcon, ArrowUpRightIcon } from "@/components/Icons";
-import { empresa, emailHref, instagramUrl, mapsUrl } from "@/lib/empresa";
+import { EnvelopeIcon, InstagramIcon, PhoneIcon, ArrowUpRightIcon } from "@/components/Icons";
+import { empresa, emailHref, telefoneHref, instagramUrl, mapsUrl } from "@/lib/empresa";
 
 export const metadata: Metadata = {
   title: "Contato — Planalto Negócios",
@@ -60,6 +60,24 @@ export default function ContatoPage() {
                   Canais de Atendimento
                 </p>
                 <ul className="space-y-7">
+                  <li>
+                    <a
+                      href={telefoneHref}
+                      className="group flex items-start gap-4 hover:opacity-80 transition-opacity"
+                    >
+                      <span className="mt-0.5 shrink-0 w-10 h-10 flex items-center justify-center border border-gold-dim group-hover:border-gold transition-colors text-gold-dim group-hover:text-gold">
+                        <PhoneIcon size={18} />
+                      </span>
+                      <div>
+                        <p className="text-[10px] tracking-[0.4em] uppercase text-text-muted mb-1.5">
+                          Telefone
+                        </p>
+                        <p className="text-text-secondary text-sm">
+                          {empresa.telefone}
+                        </p>
+                      </div>
+                    </a>
+                  </li>
                   <li>
                     <a
                       href={emailHref}
