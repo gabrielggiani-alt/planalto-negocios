@@ -103,7 +103,7 @@ export default function SistemaPage() {
         >
           <div className="flex items-center justify-center gap-4 mb-6 reveal-fade delay-1">
             <div className="h-px w-8 bg-gold-dim" />
-            <span className="text-[10px] tracking-[0.6em] uppercase text-gold-dim">
+            <span className="text-[10px] tracking-[0.6em] uppercase text-gold/70">
               Cadastro Privado
             </span>
             <div className="h-px w-8 bg-gold-dim" />
@@ -162,7 +162,7 @@ export default function SistemaPage() {
 
           {!loading && clientes.length > 0 && (
             <>
-              <div className="text-center mb-5 text-[10px] tracking-[0.5em] uppercase text-gold-dim reveal-fade">
+              <div className="text-center mb-5 text-[10px] tracking-[0.5em] uppercase text-gold/70 reveal-fade">
                 {clientes.length}{" "}
                 {clientes.length === 1 ? "registro encontrado" : "registros encontrados"}
               </div>

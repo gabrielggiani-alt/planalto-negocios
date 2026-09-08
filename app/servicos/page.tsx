@@ -62,7 +62,7 @@ export default function ServicosPage() {
                   <div className="grid lg:grid-cols-12 gap-10 items-start">
                     <div className="lg:col-span-1">
                       <span
-                        className="text-gold-dim text-[11px] tracking-[0.5em] uppercase"
+                        className="text-gold/70 text-[11px] tracking-[0.5em] uppercase"
                         style={{ fontFamily: "var(--font-display)" }}
                       >
                         {s.numero}

@@ -95,7 +95,7 @@ export default function DocumentoList({
 
             {/* Top bar with type label */}
             <div className="flex items-center justify-between px-4 py-2.5 border-b border-border/60">
-              <span className="text-[9px] tracking-[0.4em] text-gold-dim group-hover:text-gold transition-colors duration-500">
+              <span className="text-[9px] tracking-[0.4em] text-gold/70 group-hover:text-gold transition-colors duration-500">
                 {getLabelForExtension(doc.extensao)}
               </span>
               <span className="text-[8px] tracking-[0.3em] text-text-muted/50 font-mono">

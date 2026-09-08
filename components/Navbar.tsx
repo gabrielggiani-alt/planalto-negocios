@@ -3,7 +3,8 @@
 import { useState, useEffect } from "react";
 import Link from "next/link";
 import Logo from "./Logo";
-import { MenuIcon, CloseIcon } from "./Icons";
+import { MenuIcon, CloseIcon, PhoneIcon } from "./Icons";
+import { empresa, telefoneHref } from "@/lib/empresa";
 
 const NAV_LINKS = [
   { href: "/", label: "Início" },
@@ -72,13 +73,14 @@ export default function Navbar() {
           </ul>
 
           <div className="hidden lg:flex items-center gap-4">
-            <Link
-              href="/sistema"
-              className="group relative inline-flex items-center px-6 py-2.5 border border-gold/60 text-gold text-[11px] tracking-[0.3em] uppercase overflow-hidden transition-all duration-300 hover:border-gold hover:text-background"
+            <a
+              href={telefoneHref}
+              className="group relative inline-flex items-center gap-3 px-6 py-2.5 border border-gold/60 text-gold text-[13px] tracking-[0.15em] overflow-hidden transition-all duration-300 hover:border-gold hover:text-background"
             >
               <span className="absolute inset-0 bg-gold scale-x-0 group-hover:scale-x-100 origin-left transition-transform duration-300" />
-              <span className="relative">Sistema</span>
-            </Link>
+              <PhoneIcon size={16} className="relative shrink-0" />
+              <span className="relative tabular-nums">{empresa.telefone}</span>
+            </a>
           </div>
 
           <button
@@ -125,13 +127,14 @@ export default function Navbar() {
                 {link.label}
               </Link>
             ))}
-            <Link
-              href="/sistema"
+            <a
+              href={telefoneHref}
               onClick={() => setMobileOpen(false)}
-              className="mt-6 px-10 py-3 border border-gold text-gold text-sm tracking-[0.3em] uppercase hover:bg-gold hover:text-background transition-colors"
+              className="mt-6 inline-flex items-center gap-3 px-10 py-4 border border-gold text-gold text-lg tracking-[0.1em] hover:bg-gold hover:text-background transition-colors"
             >
-              Sistema
-            </Link>
+              <PhoneIcon size={20} className="shrink-0" />
+              <span className="tabular-nums">{empresa.telefone}</span>
+            </a>
           </nav>
         </div>
       )}

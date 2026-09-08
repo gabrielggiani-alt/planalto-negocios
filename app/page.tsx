@@ -6,9 +6,11 @@ import Particles from "@/components/Particles";
 import ContactForm from "@/components/ContactForm";
 import ServiceCard from "@/components/ServiceCard";
 import { SERVICOS } from "@/lib/servicos";
+import { empresa, telefoneHref } from "@/lib/empresa";
 import {
   ShieldIcon,
   EnvelopeIcon,
+  PhoneIcon,
   ChevronRightIcon,
 } from "@/components/Icons";
 
@@ -41,14 +43,14 @@ function Hero() {
       <div className="vignette" />
       <div className="grain" />
 
-      <div className="fixed top-8 left-8 ornament-corner tl reveal-fade delay-3 pointer-events-none" />
-      <div className="fixed top-8 right-8 ornament-corner tr reveal-fade delay-3 pointer-events-none" />
+      <div className="absolute top-8 left-8 ornament-corner tl reveal-fade delay-3 pointer-events-none" />
+      <div className="absolute top-8 right-8 ornament-corner tr reveal-fade delay-3 pointer-events-none" />
 
       <div className="relative z-10 max-w-7xl mx-auto w-full px-6 md:px-12 py-20 grid lg:grid-cols-12 gap-12 items-center">
         <div className="lg:col-span-7 space-y-8">
           <div className="flex items-center gap-4 reveal-fade delay-1">
             <span className="diamond" />
-            <span className="text-[10px] tracking-[0.5em] uppercase text-gold-dim">
+            <span className="text-[10px] tracking-[0.5em] uppercase text-gold/70">
               Brasília-DF &middot; Desde 2003
             </span>
           </div>
@@ -131,7 +133,7 @@ function HeroEmblem() {
         />
         <div className="mt-5 flex items-center justify-center gap-3">
           <span className="h-px w-8 bg-gold-dim" />
-          <span className="text-[9px] tracking-[0.5em] uppercase text-gold-dim">
+          <span className="text-[9px] tracking-[0.5em] uppercase text-gold/70">
             Est. 2003
           </span>
           <span className="h-px w-8 bg-gold-dim" />
@@ -334,9 +336,6 @@ function Contact() {
       id="contato"
       className="relative py-28 md:py-36 px-6 md:px-12 bg-surface-elevated/40 overflow-hidden"
     >
-      <div className="atmosphere opacity-60" />
-      <div className="grain opacity-50" />
-
       <div className="relative z-10 max-w-3xl mx-auto text-center space-y-8">
         <SectionEyebrow label="Fale Conosco" />
 
@@ -344,19 +343,47 @@ function Contact() {
           className="text-4xl md:text-5xl lg:text-6xl text-text leading-tight"
           style={{ fontFamily: "var(--font-serif)", fontWeight: 500, letterSpacing: "-0.005em" }}
         >
-          Precisa falar com nosso gerente comercial?
+          Fale com a gente sobre o seu crédito.
         </h2>
 
-        <p className="text-text-secondary text-[15px] md:text-base max-w-xl mx-auto">
-          Deixe seu e-mail abaixo. Nossa equipe entrará em contato em breve para
-          apresentar as melhores condições para o seu perfil.
+        <p className="text-text-secondary text-base md:text-lg max-w-xl mx-auto leading-relaxed">
+          Ligue e converse com nossa equipe — atendemos por telefone de segunda
+          a sexta, das 9h às 18h.
         </p>
 
-        <div className="pt-4">
+        <div className="pt-2">
+          <a
+            href={telefoneHref}
+            className="group inline-flex items-center gap-5 border border-gold/50 bg-surface/70 px-8 py-5 hover:border-gold hover:bg-surface/90 transition-colors"
+          >
+            <PhoneIcon size={26} className="text-gold shrink-0" />
+            <span className="flex flex-col items-start gap-2 leading-none">
+              <span className="text-[11px] tracking-[0.35em] uppercase text-gold/70">
+                Ligue para nós
+              </span>
+              <span
+                className="text-text text-2xl md:text-3xl tabular-nums"
+                style={{ fontFamily: "var(--font-serif)", fontWeight: 500 }}
+              >
+                {empresa.telefone}
+              </span>
+            </span>
+          </a>
+        </div>
+
+        <div className="flex items-center gap-4 max-w-xl mx-auto pt-2">
+          <span className="h-px flex-1 bg-border-subtle" />
+          <span className="text-[11px] tracking-[0.35em] uppercase text-text-muted">
+            Ou deixe seu e-mail
+          </span>
+          <span className="h-px flex-1 bg-border-subtle" />
+        </div>
+
+        <div>
           <ContactForm />
         </div>
 
-        <p className="text-text-subtle text-[11px] tracking-[0.3em] uppercase pt-2">
+        <p className="text-text-muted text-[12px] tracking-[0.25em] uppercase pt-2">
           Após inserir seu e-mail, aguarde o contato
         </p>
       </div>

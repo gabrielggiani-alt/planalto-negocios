@@ -169,7 +169,7 @@ export default function SobrePage() {
                   className="border border-border-subtle bg-surface/80 p-8 hover:border-gold/30 transition-colors duration-500"
                 >
                   <span
-                    className="text-gold-dim text-[11px] tracking-[0.5em] uppercase"
+                    className="text-gold/70 text-[11px] tracking-[0.5em] uppercase"
                     style={{ fontFamily: "var(--font-display)" }}
                   >
                     {String(i + 1).padStart(2, "0")}
@@ -226,7 +226,7 @@ export default function SobrePage() {
         <section className="relative z-10 pb-20 md:pb-28 px-6 md:px-12">
           <div className="max-w-7xl mx-auto">
             <div className="border border-dashed border-border bg-surface/20 p-10 md:p-14 text-center">
-              <p className="text-[10px] tracking-[0.5em] uppercase text-gold-dim mb-4">
+              <p className="text-[10px] tracking-[0.5em] uppercase text-gold/70 mb-4">
                 Em breve
               </p>
               <h2
@@ -235,7 +235,7 @@ export default function SobrePage() {
               >
                 Conheça nosso escritório e nossa equipe.
               </h2>
-              <p className="mt-4 text-text-subtle text-sm max-w-xl mx-auto leading-relaxed">
+              <p className="mt-4 text-text-muted text-sm max-w-xl mx-auto leading-relaxed">
                 Estamos preparando fotos do nosso espaço e da equipe que atende você
                 pessoalmente em Brasília-DF.
               </p>

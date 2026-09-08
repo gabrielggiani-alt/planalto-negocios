@@ -51,7 +51,7 @@ export default function FullContactForm({ servico }: { servico?: string } = {}) 
   }
 
   const inputClass =
-    "w-full bg-background/60 border border-border focus:border-gold/70 px-5 py-3.5 text-text placeholder:text-text-subtle outline-none transition-colors text-sm tracking-wide";
+    "w-full bg-background/60 border border-border focus:border-gold/70 px-5 py-3.5 text-text placeholder:text-text-muted outline-none transition-colors text-sm tracking-wide";
   const labelClass = "block text-[11px] tracking-[0.35em] uppercase text-gold mb-2.5";
 
   return (

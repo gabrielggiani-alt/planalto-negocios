@@ -65,7 +65,7 @@ export default async function ServicoPage({
         <section className="relative z-10 max-w-5xl mx-auto px-6 md:px-12 pt-10 pb-14 md:pt-14 md:pb-20">
           <div className="flex items-center gap-4 mb-6">
             <span
-              className="text-gold-dim text-[11px] tracking-[0.5em] uppercase"
+              className="text-gold/70 text-[11px] tracking-[0.5em] uppercase"
               style={{ fontFamily: "var(--font-display)" }}
             >
               {servico.numero}
@@ -195,7 +195,7 @@ export default async function ServicoPage({
                 href={`/servicos/${s.slug}`}
                 className="group border border-border-subtle bg-surface/80 p-7 hover:border-gold/50 hover:bg-surface/90 transition-all duration-500"
               >
-                <p className="text-[10px] tracking-[0.4em] uppercase text-gold-dim group-hover:text-gold transition-colors mb-3">
+                <p className="text-[10px] tracking-[0.4em] uppercase text-gold/70 group-hover:text-gold transition-colors mb-3">
                   {s.subtitulo}
                 </p>
                 <h3

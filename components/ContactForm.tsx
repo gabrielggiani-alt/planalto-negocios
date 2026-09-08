@@ -49,7 +49,7 @@ export default function ContactForm() {
         value={email}
         onChange={(e) => setEmail(e.target.value)}
         disabled={status === "submitting"}
-        className="flex-1 bg-background/60 border border-border focus:border-gold/70 px-5 py-3.5 text-text placeholder:text-text-subtle outline-none transition-colors text-sm tracking-wide"
+        className="flex-1 bg-background/60 border border-border focus:border-gold/70 px-5 py-3.5 text-text placeholder:text-text-muted outline-none transition-colors text-sm tracking-wide"
       />
       <button
         type="submit"

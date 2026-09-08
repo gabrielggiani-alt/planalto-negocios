@@ -72,7 +72,7 @@ export default function ClienteCard({ nome, totalDocs }: ClienteCardProps) {
 
           {/* Right side — arrow + code */}
           <div className="flex items-center gap-4 shrink-0">
-            <span className="hidden sm:block text-[9px] tracking-[0.3em] text-text-muted/40 group-hover:text-gold-dim transition-colors duration-500">
+            <span className="hidden sm:block text-[9px] tracking-[0.3em] text-text-muted/40 group-hover:text-gold/70 transition-colors duration-500">
               ABRIR
             </span>
             <svg

@@ -26,10 +26,10 @@ export default function ServiceCard({ number, title, description, icon, href }: 
       />
 
       <div className="flex items-center justify-between mb-7">
-        <span className="text-[10px] tracking-[0.5em] uppercase text-gold-dim group-hover:text-gold transition-colors">
+        <span className="text-[10px] tracking-[0.5em] uppercase text-gold/70 group-hover:text-gold transition-colors">
           {number}
         </span>
-        <span className="text-gold-dim group-hover:text-gold transition-colors">
+        <span className="text-gold/70 group-hover:text-gold transition-colors">
           {icon}
         </span>
       </div>

@@ -26,7 +26,7 @@ export default function SearchBar({
   return (
     <div className="relative w-full max-w-xl mx-auto">
       {/* Label above */}
-      <div className="flex items-center justify-center gap-3 mb-4 text-[10px] tracking-[0.5em] uppercase text-gold-dim">
+      <div className="flex items-center justify-center gap-3 mb-4 text-[10px] tracking-[0.5em] uppercase text-gold/70">
         <span className="diamond" />
         <span>Consulta Privada</span>
         <span className="diamond" />
