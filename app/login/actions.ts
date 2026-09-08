@@ -1,7 +1,8 @@
 "use server";
 
-import { cookies } from "next/headers";
+import { cookies, headers } from "next/headers";
 import { redirect } from "next/navigation";
+import { estaBloqueado, registrarFalha, limparFalhas } from "@/lib/rate-limit";
 import {
   COOKIE_SESSAO,
   DURACAO_SEGUNDOS,
@@ -25,9 +26,29 @@ export async function entrar(
     return { erro: "Informe usuário e senha." };
   }
 
+  // Limita tentativas por origem, para que uma senha fraca não seja adivinhável
+  // por força bruta. A chave é o IP quando o proxy informa, senão o usuário.
+  const cabecalhos = await headers();
+  const ip =
+    cabecalhos.get("x-forwarded-for")?.split(",")[0]?.trim() ||
+    cabecalhos.get("x-real-ip") ||
+    "desconhecido";
+  const chave = `${ip}:${usuario.toLowerCase()}`;
+
+  const { bloqueado, segundos } = estaBloqueado(chave);
+  if (bloqueado) {
+    const minutos = Math.ceil(segundos / 60);
+    return {
+      erro: `Muitas tentativas. Tente de novo em ${minutos} minuto${minutos > 1 ? "s" : ""}.`,
+    };
+  }
+
   if (!validarCredenciais(usuario, senha)) {
+    registrarFalha(chave);
     return { erro: "Usuário ou senha inválidos." };
   }
+
+  limparFalhas(chave);
 
   const token = await criarSessao(usuario);
   const cookieStore = await cookies();

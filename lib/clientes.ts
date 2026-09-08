@@ -3,6 +3,19 @@ import path from "path";
 
 const CLIENTES_DIR = "E:/Clientes";
 
+/**
+ * Confina um caminho à pasta de clientes.
+ *
+ * `startsWith` sozinho não basta: `E:\ClientesX` começa com `E:\Clientes` e
+ * passaria. Comparar com o separador no fim resolve, e o caminho da própria
+ * pasta continua válido.
+ */
+function dentroDaPastaDeClientes(caminho: string): boolean {
+  const raiz = path.resolve(CLIENTES_DIR);
+  const alvo = path.resolve(caminho);
+  return alvo === raiz || alvo.startsWith(raiz + path.sep);
+}
+
 function removeAcentos(str: string): string {
   return str.normalize("NFD").replace(/[\u0300-\u036f]/g, "");
 }
@@ -46,9 +59,10 @@ export function listarDocumentos(nomeCliente: string): Documento[] {
 
   if (!fs.existsSync(dir)) return [];
 
-  // Segurança: garantir que estamos dentro de CLIENTES_DIR
-  const resolved = path.resolve(dir);
-  if (!resolved.startsWith(path.resolve(CLIENTES_DIR))) return [];
+  // Segurança: garantir que estamos dentro de CLIENTES_DIR.
+  // A comparação inclui o separador para que uma pasta-irmã cujo nome comece
+  // igual (por exemplo E:\ClientesX) não passe pela checagem.
+  if (!dentroDaPastaDeClientes(dir)) return [];
 
   const arquivos = fs.readdirSync(dir);
 
@@ -65,7 +79,7 @@ export function resolverCaminhoDocumento(
   const absoluto = path.resolve(path.join(CLIENTES_DIR, caminhoRelativo));
 
   // Segurança: path traversal protection
-  if (!absoluto.startsWith(path.resolve(CLIENTES_DIR))) return null;
+  if (!dentroDaPastaDeClientes(absoluto)) return null;
   if (!fs.existsSync(absoluto)) return null;
 
   return absoluto;

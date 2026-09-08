@@ -2,8 +2,16 @@ import { NextRequest, NextResponse } from "next/server";
 import fs from "fs";
 import path from "path";
 import { resolverCaminhoDocumento, getMimeType } from "@/lib/clientes";
+import { COOKIE_SESSAO, verificarSessao } from "@/lib/auth";
 
 export async function GET(request: NextRequest) {
+  // Defesa em profundidade: o proxy já bloqueia esta rota, mas o handler
+  // revalida a sessão por conta própria — aqui trafegam documentos de clientes.
+  const sessao = await verificarSessao(request.cookies.get(COOKIE_SESSAO)?.value);
+  if (!sessao) {
+    return NextResponse.json({ error: "Não autorizado" }, { status: 401 });
+  }
+
   const caminhoRelativo = request.nextUrl.searchParams.get("path");
 
   if (!caminhoRelativo) {
