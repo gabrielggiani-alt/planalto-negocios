@@ -20,7 +20,7 @@ export default function LegalLayout({
       <main className="public-site on-paper relative min-h-screen overflow-hidden pt-[76px]">
 
         <div className="relative z-10 max-w-[52rem] mx-auto px-6 md:px-12 py-16 md:py-24">
-          <header className="mb-10 pb-10 border-b border-border">
+          <header className="rise mb-10 pb-10 border-b border-border">
             <div className="flex items-center gap-4 mb-6">
               <span className="h-px w-10 bg-gold-dim" />
               <span className="text-[13px] tracking-[0.12em] uppercase text-gold">

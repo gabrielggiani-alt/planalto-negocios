@@ -47,14 +47,14 @@ export default function ServicosPage() {
                 <article
                   key={s.numero}
                   id={s.slug}
-                  className="group border border-border-subtle bg-surface/80 p-6 sm:p-8 md:p-10 hover:border-gold/30 transition-colors duration-200 relative overflow-hidden scroll-mt-[100px]"
+                  className="rise group border border-border-subtle bg-surface/80 p-6 sm:p-8 md:p-10 hover:border-gold/30 transition-colors duration-200 relative overflow-hidden scroll-mt-[100px]"
                 >
                   <span
                     aria-hidden="true"
                     className="absolute top-0 left-0 w-16 h-px bg-gold-dim group-hover:bg-gold transition-colors duration-200"
                   />
 
-                  <div className="rise grid lg:grid-cols-12 gap-10 items-start">
+                  <div className="grid lg:grid-cols-12 gap-10 items-start">
                     <div className="lg:col-span-1 lg:pt-1">
                       <span
                         className="text-gold/70 text-sm tracking-[0.12em] uppercase"
@@ -114,7 +114,7 @@ export default function ServicosPage() {
 
         <section className="relative z-10 py-16 md:py-20 px-6 md:px-12 bg-surface/30">
           <div className="max-w-4xl mx-auto">
-            <div className="border border-gold/30 bg-surface/85 p-6 sm:p-8 md:p-10">
+            <div className="rise border border-gold/30 bg-surface/85 p-6 sm:p-8 md:p-10">
               <div className="flex flex-col md:flex-row items-start gap-6">
                 <span className="shrink-0 w-12 h-12 flex items-center justify-center border border-gold/60 text-gold">
                   <ShieldIcon size={24} />
@@ -143,7 +143,7 @@ export default function ServicosPage() {
         </section>
 
         <section className="relative z-10 py-20 md:py-24 px-6 md:px-12 text-center">
-          <div className="max-w-2xl mx-auto space-y-8">
+          <div className="rise max-w-2xl mx-auto space-y-8">
             <div className="flex items-center justify-center gap-4">
               <span className="h-px w-10 bg-gold-dim" />
               <span className="text-[13px] tracking-[0.12em] uppercase text-gold">Próximo Passo</span>

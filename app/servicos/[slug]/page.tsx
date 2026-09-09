@@ -84,7 +84,7 @@ export default async function ServicoPage({
         </section>
 
         {/* Benefícios + público-alvo */}
-        <section className="relative z-10 max-w-5xl mx-auto px-6 md:px-12 pb-16 md:pb-24">
+        <section className="rise relative z-10 max-w-5xl mx-auto px-6 md:px-12 pb-16 md:pb-24">
           <div className="grid lg:grid-cols-12 gap-10 lg:gap-16 items-start">
             <div className="lg:col-span-7">
               <p className="text-[13px] tracking-[0.12em] uppercase text-gold mb-6">
@@ -125,7 +125,7 @@ export default async function ServicoPage({
           className="relative z-10 bg-surface-elevated/40 border-y border-gold-deep/40 py-16 md:py-24 px-6 md:px-12 scroll-mt-[92px]"
         >
           <div className="max-w-3xl mx-auto">
-            <header className="text-center mb-12">
+            <header className="rise text-center mb-12">
               <div className="flex items-center justify-center gap-4 mb-6">
                 <span className="h-px w-10 bg-gold-dim" />
                 <span className="text-[13px] tracking-[0.12em] uppercase text-gold">
@@ -152,7 +152,7 @@ export default async function ServicoPage({
         </section>
 
         {/* Nota anti-fraude */}
-        <section className="relative z-10 max-w-4xl mx-auto px-6 md:px-12 py-16 md:py-20">
+        <section className="rise relative z-10 max-w-4xl mx-auto px-6 md:px-12 py-16 md:py-20">
           <div className="flex flex-col sm:flex-row items-start gap-6 border border-gold/30 bg-surface/80 p-5 sm:p-8 md:p-10">
             <span className="shrink-0 w-12 h-12 flex items-center justify-center border border-gold/60 text-gold">
               <ShieldIcon size={24} />
@@ -176,7 +176,7 @@ export default async function ServicoPage({
         </section>
 
         {/* Outros serviços */}
-        <section className="relative z-10 max-w-5xl mx-auto px-6 md:px-12 pb-24 md:pb-32">
+        <section className="rise relative z-10 max-w-5xl mx-auto px-6 md:px-12 pb-24 md:pb-32">
           <div className="flex items-center gap-4 mb-8">
             <span className="text-[13px] tracking-[0.12em] uppercase text-gold">
               Outros serviços

@@ -37,8 +37,8 @@ export default function ContatoPage() {
             </p>
           </header>
 
-          <div className="rise grid lg:grid-cols-12 gap-12 lg:gap-16 items-start">
-            <aside className="lg:col-span-5 lg:col-start-8 lg:row-start-1 space-y-6">
+          <div className="grid lg:grid-cols-12 gap-12 lg:gap-16 items-start">
+            <aside className="rise lg:col-span-5 lg:col-start-8 lg:row-start-1 space-y-6">
               <div className="border border-border-subtle bg-surface/70 p-6 sm:p-8">
                 <p className="text-[13px] tracking-[0.12em] uppercase text-gold mb-7">
                   Canais de Atendimento
@@ -131,7 +131,7 @@ export default function ContatoPage() {
               </div>
             </aside>
 
-            <div className="lg:col-span-7 lg:col-start-1 lg:row-start-1">
+            <div className="rise lg:col-span-7 lg:col-start-1 lg:row-start-1">
               <div className="border border-border-subtle bg-surface/80 p-5 sm:p-8 md:p-10">
                 <span className="text-[13px] tracking-[0.12em] uppercase text-gold">
                   Formulário de Contato

@@ -35,16 +35,29 @@ export default function RevealOnScroll() {
     const alvos = Array.from(document.querySelectorAll<HTMLElement>(".rise"));
     const alturaTela = window.innerHeight;
 
-    const observador = new IntersectionObserver(
-      (entradas) => {
-        for (const entrada of entradas) {
-          if (!entrada.isIntersecting) continue;
-          entrada.target.classList.add("is-in");
-          observador.unobserve(entrada.target);
-        }
-      },
-      { rootMargin: "0px 0px -6% 0px", threshold: 0 }
-    );
+    function criarObservador(margemInferior: string) {
+      return new IntersectionObserver(
+        (entradas) => {
+          for (const entrada of entradas) {
+            if (!entrada.isIntersecting) continue;
+            entrada.target.classList.add("is-in");
+            observadorPadrao.unobserve(entrada.target);
+            observadorAlto.unobserve(entrada.target);
+          }
+        },
+        { rootMargin: `0px 0px ${margemInferior} 0px`, threshold: 0 }
+      );
+    }
+
+    // Peça de tamanho normal anima assim que encosta na tela.
+    const observadorPadrao = criarObservador("-6%");
+
+    // Peça alta espera entrar mais fundo antes de animar. Se ela disparasse na
+    // borda, a animação terminaria enquanto o conteúdo ainda está longe dos
+    // olhos — que foi o motivo de o dono nunca ver movimento nenhum. Numa tela
+    // de celular quase tudo é "alto", então excluir essas peças deixava página
+    // inteira sem animação.
+    const observadorAlto = criarObservador("-42%");
 
     const escondidos: HTMLElement[] = [];
 
@@ -55,13 +68,15 @@ export default function RevealOnScroll() {
       // já está olhando faz a página piscar.
       if (caixa.top < alturaTela * 0.92) continue;
 
-      // Mais alta que a tela: não dá para vê-la entrando, então a animação
-      // termina antes de o conteúdo chegar aos olhos. Não anima.
-      if (caixa.height > alturaTela * 0.85) continue;
+      // Mais de duas telas de altura: aí não há posição de scroll em que a
+      // entrada seja percebida. Essa aparece direto.
+      if (caixa.height > alturaTela * 2) continue;
 
       alvo.classList.add("will-rise");
       escondidos.push(alvo);
-      observador.observe(alvo);
+
+      if (caixa.height > alturaTela * 0.8) observadorAlto.observe(alvo);
+      else observadorPadrao.observe(alvo);
     }
 
     // Rede de segurança: nada fica escondido para sempre, aconteça o que
@@ -72,7 +87,8 @@ export default function RevealOnScroll() {
 
     return () => {
       window.clearTimeout(destravar);
-      observador.disconnect();
+      observadorPadrao.disconnect();
+      observadorAlto.disconnect();
       for (const alvo of escondidos) alvo.classList.remove("will-rise");
     };
   }, [rota]);
