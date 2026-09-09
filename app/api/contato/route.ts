@@ -1,5 +1,6 @@
 import { NextResponse } from "next/server";
 import { empresa } from "@/lib/empresa";
+import { estaBloqueado, registrarFalha } from "@/lib/rate-limit";
 
 /**
  * Envio real do formulário de contato.
@@ -21,6 +22,24 @@ export async function POST(req: Request) {
   if (!apiKey) {
     return NextResponse.json({ ok: false, reason: "nao-configurado" }, { status: 501 });
   }
+
+  // Endpoint público que gasta cota de e-mail a cada chamada. O honeypot pega
+  // robô ingênuo; não pega quem dispara em laço de propósito. Sem este teto,
+  // o custo cresceria com o abuso e não com o uso real.
+  const origem =
+    req.headers.get("x-forwarded-for")?.split(",")[0]?.trim() ||
+    req.headers.get("x-real-ip") ||
+    "desconhecida";
+  const chave = `contato:${origem}`;
+
+  const { bloqueado, segundos } = estaBloqueado(chave);
+  if (bloqueado) {
+    return NextResponse.json(
+      { ok: false, reason: "muitas-tentativas", segundos },
+      { status: 429, headers: { "Retry-After": String(segundos) } }
+    );
+  }
+  registrarFalha(chave);
 
   let dados: {
     nome?: string;

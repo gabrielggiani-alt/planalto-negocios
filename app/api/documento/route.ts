@@ -29,8 +29,10 @@ export async function GET(request: NextRequest) {
 
   const ext = path.extname(caminhoAbsoluto).toLowerCase();
   const mimeType = getMimeType(ext);
-  const fileBuffer = fs.readFileSync(caminhoAbsoluto);
   const fileName = path.basename(caminhoAbsoluto);
+
+  // O arquivo mora no pendrive: se ele sair da máquina entre a validação do
+  // caminho e a leitura, o erro não pode vazar o caminho do disco.
 
   // DOCX: forçar download (browser não renderiza nativamente)
   const isDownload = ext === ".docx" || ext === ".doc";
@@ -46,5 +48,13 @@ export async function GET(request: NextRequest) {
     headers["Content-Disposition"] = `inline; filename="${encodeURIComponent(fileName)}"`;
   }
 
-  return new NextResponse(fileBuffer, { headers });
+  try {
+    const fileBuffer = fs.readFileSync(caminhoAbsoluto);
+    return new NextResponse(new Uint8Array(fileBuffer), { headers });
+  } catch {
+    return NextResponse.json(
+      { error: "Não foi possível ler o documento." },
+      { status: 500 }
+    );
+  }
 }

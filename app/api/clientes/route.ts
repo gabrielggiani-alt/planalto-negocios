@@ -15,13 +15,21 @@ export async function GET(request: NextRequest) {
   const query = searchParams.get("q") || "";
   const nome = searchParams.get("nome");
 
-  // Se tem nome, retorna documentos do cliente
-  if (nome) {
-    const documentos = listarDocumentos(nome);
-    return NextResponse.json({ nome, documentos });
-  }
+  // A leitura vem do pendrive. Se ele for removido no meio da requisição, o
+  // erro do sistema de arquivos subiria cru e levaria o caminho do disco na
+  // resposta. Quem chamou não precisa saber onde os arquivos moram.
+  try {
+    if (nome) {
+      const documentos = listarDocumentos(nome);
+      return NextResponse.json({ nome, documentos });
+    }
 
-  // Senão, busca clientes
-  const clientes = listarClientes(query);
-  return NextResponse.json(clientes);
+    const clientes = listarClientes(query);
+    return NextResponse.json(clientes);
+  } catch {
+    return NextResponse.json(
+      { error: "Não foi possível ler os dados dos clientes." },
+      { status: 500 }
+    );
+  }
 }
