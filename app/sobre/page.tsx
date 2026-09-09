@@ -2,7 +2,6 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
-import Particles from "@/components/Particles";
 import { ChevronRightIcon } from "@/components/Icons";
 
 export const metadata: Metadata = {
@@ -58,18 +57,14 @@ export default function SobrePage() {
     <>
       <Navbar />
 
-      <main className="relative overflow-hidden pt-[76px]">
-        <div className="atmosphere" />
-        <Particles count={10} />
-        <div className="vignette" />
-        <div className="grain" />
+      <main className="public-site on-paper relative overflow-hidden pt-[76px]">
 
         {/* Cabeçalho */}
-        <section className="relative z-10 py-20 md:py-28 px-6 md:px-12">
+        <section className="relative z-10 py-16 md:py-24 px-6 md:px-12">
           <div className="max-w-3xl mx-auto text-center">
             <div className="flex items-center justify-center gap-4 mb-6">
               <span className="h-px w-10 bg-gold-dim" />
-              <span className="text-[10px] tracking-[0.6em] uppercase text-gold">
+              <span className="text-[13px] tracking-[0.12em] uppercase text-gold">
                 Quem Somos
               </span>
               <span className="h-px w-10 bg-gold-dim" />
@@ -80,7 +75,7 @@ export default function SobrePage() {
             >
               Mais de duas décadas atendendo Brasília com seriedade.
             </h1>
-            <p className="mt-6 text-text-secondary text-[15px] md:text-base max-w-2xl mx-auto leading-relaxed">
+            <p className="mt-6 text-text-secondary text-base max-w-2xl mx-auto leading-relaxed">
               Desde 2003, ajudamos aposentados, pensionistas e servidores públicos
               a encontrar as melhores condições de crédito consignado, com confiança
               e atendimento próximo.
@@ -94,7 +89,7 @@ export default function SobrePage() {
             <div className="lg:col-span-7 space-y-8">
               <div className="flex items-center gap-4">
                 <span className="diamond" />
-                <span className="text-[10px] tracking-[0.5em] uppercase text-gold">
+                <span className="text-[13px] tracking-[0.12em] uppercase text-gold">
                   Nossa História
                 </span>
               </div>
@@ -104,7 +99,7 @@ export default function SobrePage() {
               >
                 Uma referência em consignado no coração do Distrito Federal.
               </h2>
-              <div className="space-y-5 text-text-secondary text-[15px] md:text-base leading-relaxed max-w-xl">
+              <div className="space-y-5 text-text-secondary text-base leading-relaxed max-w-xl">
                 <p>
                   Fundada em 2003, a Planalto Negócios consolidou-se como referência
                   no mercado de crédito consignado em Brasília-DF, atuando como
@@ -123,17 +118,17 @@ export default function SobrePage() {
               </div>
             </div>
 
-            <aside className="lg:col-span-5 lg:pl-12 lg:border-l lg:border-gold-deep">
-              <ul className="space-y-10">
+            <aside className="lg:col-span-5 lg:pl-10 lg:border-l lg:border-border">
+              <ul className="divide-y divide-border">
                 {STATS.map((stat) => (
-                  <li key={stat.label} className="flex items-baseline gap-6">
+                  <li key={stat.label} className="grid grid-cols-[minmax(0,1fr)_minmax(0,1fr)] items-center gap-4 py-6 first:pt-0 last:pb-0">
                     <span
-                      className="text-gold text-5xl md:text-6xl tabular-nums leading-none"
-                      style={{ fontFamily: "var(--font-display)", letterSpacing: "0.02em" }}
+                      className="text-gold text-4xl sm:text-5xl font-medium tabular-nums leading-none"
+                      style={{ fontFamily: "var(--font-body)", letterSpacing: "-0.04em" }}
                     >
                       {stat.value}
                     </span>
-                    <span className="text-text-muted text-[11px] tracking-[0.4em] uppercase">
+                    <span className="text-text-secondary text-base leading-relaxed">
                       {stat.label}
                     </span>
                   </li>
@@ -144,12 +139,12 @@ export default function SobrePage() {
         </section>
 
         {/* Valores */}
-        <section className="relative z-10 py-20 md:py-28 px-6 md:px-12 bg-surface/30">
+        <section className="relative z-10 py-16 md:py-24 px-6 md:px-12 bg-surface/30">
           <div className="max-w-7xl mx-auto">
-            <header className="text-center mb-16">
+            <header className="rise text-center mb-16">
               <div className="flex items-center justify-center gap-4 mb-6">
                 <span className="h-px w-10 bg-gold-dim" />
-                <span className="text-[10px] tracking-[0.6em] uppercase text-gold">
+                <span className="text-[13px] tracking-[0.12em] uppercase text-gold">
                   No Que Acreditamos
                 </span>
                 <span className="h-px w-10 bg-gold-dim" />
@@ -162,15 +157,15 @@ export default function SobrePage() {
               </h2>
             </header>
 
-            <div className="grid sm:grid-cols-2 gap-6">
+            <div className="rise grid sm:grid-cols-2 gap-6">
               {VALORES.map((v, i) => (
                 <article
                   key={v.titulo}
-                  className="border border-border-subtle bg-surface/80 p-8 hover:border-gold/30 transition-colors duration-500"
+                  className="border border-border-subtle bg-surface/80 p-8 hover:border-gold/30 transition-colors duration-200"
                 >
                   <span
-                    className="text-gold/70 text-[11px] tracking-[0.5em] uppercase"
-                    style={{ fontFamily: "var(--font-display)" }}
+                    className="text-gold/70 text-sm tracking-[0.12em] uppercase"
+                    style={{ fontFamily: "var(--font-body)" }}
                   >
                     {String(i + 1).padStart(2, "0")}
                   </span>
@@ -180,7 +175,7 @@ export default function SobrePage() {
                   >
                     {v.titulo}
                   </h3>
-                  <p className="mt-3 text-text-secondary text-[15px] leading-relaxed">
+                  <p className="mt-3 text-text-secondary text-base leading-relaxed">
                     {v.descricao}
                   </p>
                 </article>
@@ -190,11 +185,11 @@ export default function SobrePage() {
         </section>
 
         {/* Público atendido */}
-        <section className="relative z-10 py-20 md:py-28 px-6 md:px-12">
+        <section className="relative z-10 py-16 md:py-24 px-6 md:px-12">
           <div className="max-w-4xl mx-auto text-center">
             <div className="flex items-center justify-center gap-4 mb-6">
               <span className="h-px w-10 bg-gold-dim" />
-              <span className="text-[10px] tracking-[0.6em] uppercase text-gold">
+              <span className="text-[13px] tracking-[0.12em] uppercase text-gold">
                 Para Quem Atendemos
               </span>
               <span className="h-px w-10 bg-gold-dim" />
@@ -209,7 +204,7 @@ export default function SobrePage() {
               {PUBLICO.map((p) => (
                 <li
                   key={p}
-                  className="flex-1 max-w-sm mx-auto border border-gold-deep/60 bg-surface/80 p-8 text-text-secondary text-[15px] leading-relaxed"
+                  className="flex-1 max-w-sm mx-auto border border-gold-deep/60 bg-surface/80 p-8 text-text-secondary text-base leading-relaxed"
                 >
                   {p}
                 </li>
@@ -225,8 +220,8 @@ export default function SobrePage() {
         */}
         <section className="relative z-10 pb-20 md:pb-28 px-6 md:px-12">
           <div className="max-w-7xl mx-auto">
-            <div className="border border-dashed border-border bg-surface/20 p-10 md:p-14 text-center">
-              <p className="text-[10px] tracking-[0.5em] uppercase text-gold/70 mb-4">
+            <div className="border border-dashed border-border bg-surface/20 p-6 sm:p-8 md:p-12 text-center">
+              <p className="text-[13px] tracking-[0.12em] uppercase text-gold/70 mb-4">
                 Em breve
               </p>
               <h2
@@ -235,7 +230,7 @@ export default function SobrePage() {
               >
                 Conheça nosso escritório e nossa equipe.
               </h2>
-              <p className="mt-4 text-text-muted text-sm max-w-xl mx-auto leading-relaxed">
+              <p className="mt-4 text-text-muted text-base max-w-xl mx-auto leading-relaxed">
                 Estamos preparando fotos do nosso espaço e da equipe que atende você
                 pessoalmente em Brasília-DF.
               </p>
@@ -252,21 +247,21 @@ export default function SobrePage() {
             >
               Vamos conversar sobre o seu crédito?
             </h2>
-            <p className="text-text-secondary text-[15px] leading-relaxed">
+            <p className="text-text-secondary text-base leading-relaxed">
               Nossa equipe está pronta para apresentar as melhores condições para o
               seu perfil, sem compromisso.
             </p>
             <div className="flex flex-col sm:flex-row gap-4 justify-center">
               <Link
                 href="/contato"
-                className="inline-flex items-center justify-center gap-3 px-8 py-4 btn-primary text-[12px] tracking-[0.3em] uppercase"
+                className="inline-flex items-center justify-center gap-3 px-8 py-4 btn-primary action-link"
               >
                 <span>Fale Conosco</span>
                 <ChevronRightIcon size={14} />
               </Link>
               <Link
                 href="/servicos"
-                className="inline-flex items-center justify-center gap-3 px-8 py-4 border border-gold/60 text-gold text-[12px] tracking-[0.3em] uppercase hover:bg-gold/10 hover:border-gold transition-all"
+                className="inline-flex items-center justify-center gap-3 px-8 py-4 border border-gold/60 action-link text-gold hover:bg-gold/10 hover:border-gold transition-all"
               >
                 <span>Nossos Serviços</span>
                 <ChevronRightIcon size={14} />

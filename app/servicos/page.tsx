@@ -2,7 +2,6 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
-import Particles from "@/components/Particles";
 import ScrollToHash from "@/components/ScrollToHash";
 import { ChevronRightIcon, ShieldIcon } from "@/components/Icons";
 import { SERVICOS } from "@/lib/servicos";
@@ -19,18 +18,14 @@ export default function ServicosPage() {
       <ScrollToHash />
       <Navbar />
 
-      <main className="relative overflow-hidden pt-[76px]">
-        <div className="atmosphere" />
-        <Particles count={10} />
-        <div className="vignette" />
-        <div className="grain" />
+      <main className="public-site on-paper relative overflow-hidden pt-[76px]">
 
-        <section className="relative z-10 py-20 md:py-28 px-6 md:px-12">
+        <section className="relative z-10 py-16 md:py-24 px-6 md:px-12">
           <div className="max-w-7xl mx-auto">
-            <header className="text-center mb-20">
+            <header className="rise text-center mb-12 md:mb-16">
               <div className="flex items-center justify-center gap-4 mb-6">
                 <span className="h-px w-10 bg-gold-dim" />
-                <span className="text-[10px] tracking-[0.6em] uppercase text-gold">
+                <span className="text-[13px] tracking-[0.12em] uppercase text-gold">
                   O Que Oferecemos
                 </span>
                 <span className="h-px w-10 bg-gold-dim" />
@@ -41,29 +36,29 @@ export default function ServicosPage() {
               >
                 Soluções em crédito consignado para quem mais precisa.
               </h1>
-              <p className="mt-6 text-text-secondary text-[15px] md:text-base max-w-2xl mx-auto leading-relaxed">
+              <p className="mt-6 text-text-secondary text-base max-w-2xl mx-auto leading-relaxed">
                 Com mais de duas décadas de experiência, oferecemos produtos consignados com as melhores
                 taxas e atendimento personalizado em Brasília-DF.
               </p>
             </header>
 
             <div className="space-y-6">
-              {SERVICOS.map((s, i) => (
+              {SERVICOS.map((s) => (
                 <article
                   key={s.numero}
                   id={s.slug}
-                  className="group border border-border-subtle bg-surface/80 p-8 md:p-12 hover:border-gold/30 transition-all duration-500 relative overflow-hidden scroll-mt-[100px]"
+                  className="group border border-border-subtle bg-surface/80 p-6 sm:p-8 md:p-10 hover:border-gold/30 transition-colors duration-200 relative overflow-hidden scroll-mt-[100px]"
                 >
                   <span
                     aria-hidden="true"
-                    className="absolute top-0 left-0 w-16 h-px bg-gold-dim group-hover:w-full group-hover:bg-gold transition-all duration-700"
+                    className="absolute top-0 left-0 w-16 h-px bg-gold-dim group-hover:bg-gold transition-colors duration-200"
                   />
 
-                  <div className="grid lg:grid-cols-12 gap-10 items-start">
-                    <div className="lg:col-span-1">
+                  <div className="rise grid lg:grid-cols-12 gap-10 items-start">
+                    <div className="lg:col-span-1 lg:pt-1">
                       <span
-                        className="text-gold/70 text-[11px] tracking-[0.5em] uppercase"
-                        style={{ fontFamily: "var(--font-display)" }}
+                        className="text-gold/70 text-sm tracking-[0.12em] uppercase"
+                        style={{ fontFamily: "var(--font-body)" }}
                       >
                         {s.numero}
                       </span>
@@ -71,7 +66,7 @@ export default function ServicosPage() {
 
                     <div className="lg:col-span-5 space-y-4">
                       <div>
-                        <p className="text-[10px] tracking-[0.4em] uppercase text-gold mb-2">
+                        <p className="text-[13px] tracking-[0.12em] uppercase text-gold mb-2">
                           {s.subtitulo}
                         </p>
                         <h2
@@ -81,33 +76,33 @@ export default function ServicosPage() {
                           {s.titulo}
                         </h2>
                       </div>
-                      <p className="text-text-secondary text-[15px] leading-relaxed">{s.descricao}</p>
+                      <p className="text-text-secondary text-base leading-relaxed">{s.descricao}</p>
                       <Link
                         href={`/servicos/${s.slug}`}
-                        className="group inline-flex items-center justify-center gap-3 px-7 py-3.5 btn-primary text-[11px] tracking-[0.3em] uppercase"
+                        className="group inline-flex items-center justify-center gap-3 px-7 py-3.5 btn-primary action-link"
                       >
                         <span>Solicitar este serviço</span>
-                        <ChevronRightIcon size={14} className="group-hover:translate-x-1 transition-transform" />
+                        <ChevronRightIcon size={14} />
                       </Link>
                     </div>
 
-                    <div className="lg:col-span-6">
-                      <p className="text-[10px] tracking-[0.4em] uppercase text-text-muted mb-5">
+                    <div className="lg:col-span-6 lg:border-l lg:border-border lg:pl-8">
+                      <p className="text-[13px] tracking-[0.12em] uppercase text-text-muted mb-5">
                         Benefícios
                       </p>
                       <ul className="space-y-3">
                         {s.itens.map((item) => (
-                          <li key={item} className="flex items-start gap-3 text-text-secondary text-sm">
+                          <li key={item} className="flex items-start gap-3 text-text-secondary text-base">
                             <span className="mt-1.5 shrink-0 w-1.5 h-1.5 bg-gold rotate-45" aria-hidden="true" />
                             {item}
                           </li>
                         ))}
                       </ul>
                       <div className="mt-6 pt-6 border-t border-gold-deep/40">
-                        <p className="text-[10px] tracking-[0.4em] uppercase text-text-muted mb-1">
+                        <p className="text-[13px] tracking-[0.12em] uppercase text-text-muted mb-1">
                           Público-alvo
                         </p>
-                        <p className="text-text-secondary text-sm">{s.publico}</p>
+                        <p className="text-text-secondary text-base">{s.publico}</p>
                       </div>
                     </div>
                   </div>
@@ -119,13 +114,13 @@ export default function ServicosPage() {
 
         <section className="relative z-10 py-16 md:py-20 px-6 md:px-12 bg-surface/30">
           <div className="max-w-4xl mx-auto">
-            <div className="border border-gold/30 bg-surface/85 p-8 md:p-12">
+            <div className="border border-gold/30 bg-surface/85 p-6 sm:p-8 md:p-10">
               <div className="flex flex-col md:flex-row items-start gap-6">
                 <span className="shrink-0 w-12 h-12 flex items-center justify-center border border-gold/60 text-gold">
                   <ShieldIcon size={24} />
                 </span>
                 <div className="flex-1">
-                  <p className="text-[10px] tracking-[0.5em] uppercase text-gold mb-3">
+                  <p className="text-[13px] tracking-[0.12em] uppercase text-gold mb-3">
                     Alerta Importante
                   </p>
                   <p
@@ -136,10 +131,10 @@ export default function ServicosPage() {
                   </p>
                   <Link
                     href="/seguranca"
-                    className="group inline-flex items-center gap-2 text-gold text-[11px] tracking-[0.3em] uppercase hover:text-gold-light transition-colors"
+                    className="group action-link inline-flex items-center gap-2 text-gold hover:text-gold-light transition-colors"
                   >
                     <span>Saiba mais sobre segurança</span>
-                    <ChevronRightIcon size={14} className="group-hover:translate-x-1 transition-transform" />
+                    <ChevronRightIcon size={14} />
                   </Link>
                 </div>
               </div>
@@ -151,7 +146,7 @@ export default function ServicosPage() {
           <div className="max-w-2xl mx-auto space-y-8">
             <div className="flex items-center justify-center gap-4">
               <span className="h-px w-10 bg-gold-dim" />
-              <span className="text-[10px] tracking-[0.6em] uppercase text-gold">Próximo Passo</span>
+              <span className="text-[13px] tracking-[0.12em] uppercase text-gold">Próximo Passo</span>
               <span className="h-px w-10 bg-gold-dim" />
             </div>
             <h2
@@ -160,12 +155,12 @@ export default function ServicosPage() {
             >
               Pronto para simular?
             </h2>
-            <p className="text-text-secondary text-[15px] leading-relaxed">
+            <p className="text-text-secondary text-base leading-relaxed">
               Entre em contato e nossa equipe preparará uma proposta personalizada para o seu perfil.
             </p>
             <Link
               href="/contato"
-              className="inline-flex items-center justify-center gap-3 px-8 py-4 btn-primary text-[12px] tracking-[0.3em] uppercase"
+              className="inline-flex items-center justify-center gap-3 px-8 py-4 btn-primary action-link"
             >
               <span>Fale Conosco</span>
               <ChevronRightIcon size={14} />

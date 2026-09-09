@@ -16,18 +16,18 @@ export default function Footer() {
   const year = new Date().getFullYear();
 
   return (
-    <footer className="relative z-10 mt-24 border-t border-gold-deep/50 bg-surface/80">
+    <footer className="public-footer relative z-10 mt-0 border-t border-gold-deep/50 bg-surface/80">
       <div className="max-w-7xl mx-auto px-6 md:px-12 py-16 grid grid-cols-1 md:grid-cols-12 gap-10">
         <section className="md:col-span-5 space-y-5" aria-labelledby="footer-marca">
           <Logo variant="full" size={42} />
           <p
             id="footer-marca"
-            className="text-text-secondary text-sm leading-relaxed max-w-md"
+            className="text-text-secondary text-base leading-relaxed max-w-md"
             style={{ fontFamily: "var(--font-serif)", fontSize: 16 }}
           >
             Solução em consignado.
           </p>
-          <p className="text-text-muted text-[15px] leading-relaxed max-w-md">
+          <p className="text-text-muted text-base leading-relaxed max-w-md">
             Correspondente bancário em Brasília-DF, atendendo aposentados, pensionistas e servidores públicos com mais de 20 anos de experiência no mercado de crédito consignado.
           </p>
         </section>
@@ -35,16 +35,16 @@ export default function Footer() {
         <nav className="md:col-span-3" aria-labelledby="footer-nav">
           <h3
             id="footer-nav"
-            className="text-gold text-[12px] tracking-[0.3em] uppercase mb-6"
+            className="text-gold text-sm tracking-[0.12em] uppercase mb-6"
           >
             Navegação
           </h3>
-          <ul className="space-y-3">
+          <ul className="space-y-1">
             {NAV_LINKS.map((link) => (
               <li key={link.href}>
                 <Link
                   href={link.href}
-                  className="text-text-secondary text-[15px] tracking-wide hover:text-gold transition-colors inline-flex items-center gap-2 group"
+                  className="text-text-secondary text-base hover:text-gold transition-colors inline-flex items-center gap-2 group"
                 >
                   <span>{link.label}</span>
                   <ChevronArrow />
@@ -57,7 +57,7 @@ export default function Footer() {
         <section className="md:col-span-4 space-y-6" aria-labelledby="footer-contato">
           <h3
             id="footer-contato"
-            className="text-gold text-[12px] tracking-[0.3em] uppercase"
+            className="text-gold text-sm tracking-[0.12em] uppercase"
           >
             Contato
           </h3>
@@ -109,23 +109,23 @@ export default function Footer() {
       </div>
 
       <div className="border-t border-gold-deep/40">
-        <div className="max-w-7xl mx-auto px-6 md:px-12 py-6 flex flex-col md:flex-row items-center justify-between gap-4">
-          <p className="text-text-muted text-[12px] tracking-[0.2em] uppercase">
+        <div className="max-w-7xl mx-auto px-6 md:px-12 py-6 flex flex-col xl:flex-row items-center justify-between gap-4">
+          <p className="text-text-muted text-sm tracking-normal">
             &copy; 2003–{year} &middot; Planalto Negócios
           </p>
           <nav
             aria-label="Links legais"
-            className="flex items-center gap-4 text-text-muted text-[13px] tracking-[0.15em] uppercase"
+            className="flex flex-wrap items-center justify-center gap-4 text-text-secondary text-base"
           >
-            <Link href="/termos" className="hover:text-gold transition-colors">
+            <Link href="/termos" className="inline-flex items-center hover:text-gold transition-colors">
               Termos de Uso
             </Link>
             <span className="diamond opacity-50" />
-            <Link href="/privacidade" className="hover:text-gold transition-colors">
+            <Link href="/privacidade" className="inline-flex items-center hover:text-gold transition-colors">
               Privacidade
             </Link>
           </nav>
-          <p className="text-text-muted text-[12px] tracking-[0.2em] uppercase">
+          <p className="text-text-muted text-sm tracking-normal">
             Todos os direitos reservados
           </p>
         </div>
@@ -138,7 +138,7 @@ function ChevronArrow() {
   return (
     <span
       aria-hidden="true"
-      className="inline-block w-3 h-px bg-gold-dim transition-all group-hover:w-5 group-hover:bg-gold"
+      className="inline-block w-3 h-px bg-gold-dim transition-colors group-hover:bg-gold"
     />
   );
 }

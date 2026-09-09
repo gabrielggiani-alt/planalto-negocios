@@ -1,7 +1,6 @@
 import type { Metadata } from "next";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
-import Particles from "@/components/Particles";
 import FullContactForm from "@/components/FullContactForm";
 import { EnvelopeIcon, InstagramIcon, PhoneIcon, ArrowUpRightIcon } from "@/components/Icons";
 import { empresa, emailHref, telefoneHref, instagramUrl, mapsUrl } from "@/lib/empresa";
@@ -17,17 +16,13 @@ export default function ContatoPage() {
     <>
       <Navbar />
 
-      <main className="relative min-h-screen overflow-hidden pt-[76px]">
-        <div className="atmosphere" />
-        <Particles count={10} />
-        <div className="vignette" />
-        <div className="grain" />
+      <main className="public-site on-paper relative min-h-screen overflow-hidden pt-[76px]">
 
-        <div className="relative z-10 max-w-7xl mx-auto px-6 md:px-12 py-20 md:py-28">
-          <header className="text-center mb-20">
+        <div className="relative z-10 max-w-7xl mx-auto px-6 md:px-12 py-16 md:py-24">
+          <header className="rise text-center mb-12 md:mb-16">
             <div className="flex items-center justify-center gap-4 mb-6">
               <span className="h-px w-10 bg-gold-dim" />
-              <span className="text-[10px] tracking-[0.6em] uppercase text-gold">Fale Conosco</span>
+              <span className="text-[13px] tracking-[0.12em] uppercase text-gold">Fale Conosco</span>
               <span className="h-px w-10 bg-gold-dim" />
             </div>
             <h1
@@ -36,43 +31,32 @@ export default function ContatoPage() {
             >
               Entre em contato.
             </h1>
-            <p className="mt-6 text-text-secondary text-[15px] md:text-base max-w-xl mx-auto leading-relaxed">
+            <p className="mt-6 text-text-secondary text-base max-w-xl mx-auto leading-relaxed">
               Nossa equipe está pronta para apresentar as melhores condições de crédito consignado
               para o seu perfil.
             </p>
           </header>
 
-          <div className="grid lg:grid-cols-12 gap-12 lg:gap-16 items-start">
-            <div className="lg:col-span-7">
-              <div className="border border-border-subtle bg-surface/80 p-8 md:p-10">
-                <span className="text-[10px] tracking-[0.5em] uppercase text-gold">
-                  Formulário de Contato
-                </span>
-                <div className="mt-8">
-                  <FullContactForm />
-                </div>
-              </div>
-            </div>
-
-            <aside className="lg:col-span-5 space-y-6">
-              <div className="border border-border-subtle bg-surface/70 p-8">
-                <p className="text-[10px] tracking-[0.5em] uppercase text-gold mb-7">
+          <div className="rise grid lg:grid-cols-12 gap-12 lg:gap-16 items-start">
+            <aside className="lg:col-span-5 lg:col-start-8 lg:row-start-1 space-y-6">
+              <div className="border border-border-subtle bg-surface/70 p-6 sm:p-8">
+                <p className="text-[13px] tracking-[0.12em] uppercase text-gold mb-7">
                   Canais de Atendimento
                 </p>
                 <ul className="space-y-7">
                   <li>
                     <a
                       href={telefoneHref}
-                      className="group flex items-start gap-4 hover:opacity-80 transition-opacity"
+                      className="group flex items-start gap-4 hover:text-gold transition-colors"
                     >
                       <span className="mt-0.5 shrink-0 w-10 h-10 flex items-center justify-center border border-gold-dim group-hover:border-gold transition-colors text-gold-dim group-hover:text-gold">
                         <PhoneIcon size={18} />
                       </span>
                       <div>
-                        <p className="text-[10px] tracking-[0.4em] uppercase text-text-muted mb-1.5">
+                        <p className="text-[13px] tracking-[0.12em] uppercase text-text-muted mb-1.5">
                           Telefone
                         </p>
-                        <p className="text-text-secondary text-sm">
+                        <p className="text-text text-2xl font-medium tabular-nums">
                           {empresa.telefone}
                         </p>
                       </div>
@@ -81,16 +65,16 @@ export default function ContatoPage() {
                   <li>
                     <a
                       href={emailHref}
-                      className="group flex items-start gap-4 hover:opacity-80 transition-opacity"
+                      className="group flex items-start gap-4 hover:text-gold transition-colors"
                     >
                       <span className="mt-0.5 shrink-0 w-10 h-10 flex items-center justify-center border border-gold-dim group-hover:border-gold transition-colors text-gold-dim group-hover:text-gold">
                         <EnvelopeIcon size={18} />
                       </span>
                       <div>
-                        <p className="text-[10px] tracking-[0.4em] uppercase text-text-muted mb-1.5">
+                        <p className="text-[13px] tracking-[0.12em] uppercase text-text-muted mb-1.5">
                           E-mail
                         </p>
-                        <p className="text-text-secondary text-sm break-all">
+                        <p className="text-text-secondary text-base break-all">
                           {empresa.email}
                         </p>
                       </div>
@@ -101,16 +85,16 @@ export default function ContatoPage() {
                       href={instagramUrl}
                       target="_blank"
                       rel="noopener noreferrer"
-                      className="group flex items-start gap-4 hover:opacity-80 transition-opacity"
+                      className="group flex items-start gap-4 hover:text-gold transition-colors"
                     >
                       <span className="mt-0.5 shrink-0 w-10 h-10 flex items-center justify-center border border-gold-dim group-hover:border-gold transition-colors text-gold-dim group-hover:text-gold">
                         <InstagramIcon size={18} />
                       </span>
                       <div>
-                        <p className="text-[10px] tracking-[0.4em] uppercase text-text-muted mb-1.5">
+                        <p className="text-[13px] tracking-[0.12em] uppercase text-text-muted mb-1.5">
                           Instagram
                         </p>
-                        <p className="text-text-secondary text-sm flex items-center gap-2">
+                        <p className="text-text-secondary text-base flex items-center gap-2">
                           @{empresa.instagram}
                           <ArrowUpRightIcon size={12} className="text-text-muted" />
                         </p>
@@ -120,35 +104,43 @@ export default function ContatoPage() {
                 </ul>
               </div>
 
-              <div className="border border-border-subtle bg-surface/70 p-8">
-                <p className="text-[10px] tracking-[0.5em] uppercase text-gold mb-6">Endereço</p>
-                <address className="not-italic space-y-2 text-text-secondary text-sm leading-relaxed">
+              <div className="border border-border-subtle bg-surface/70 p-6 sm:p-8">
+                <p className="text-[13px] tracking-[0.12em] uppercase text-gold mb-6">Endereço</p>
+                <address className="not-italic space-y-2 text-text-secondary text-base leading-relaxed">
                   <p>{empresa.endereco}</p>
                   <p>{empresa.cidade}</p>
                   {empresa.cep && (
-                    <p className="text-text-muted text-xs tracking-wider pt-1">CEP {empresa.cep}</p>
+                    <p className="text-text-muted text-base tracking-wider pt-1">CEP {empresa.cep}</p>
                   )}
                 </address>
                 <a
                   href={mapsUrl}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="group inline-flex items-center gap-2 mt-5 text-gold text-[11px] tracking-[0.3em] uppercase hover:text-gold-light transition-colors"
+                  className="action-link inline-flex items-center gap-2 mt-5 text-gold hover:text-gold-light transition-colors"
                 >
                   <span>Ver no Google Maps</span>
-                  <ArrowUpRightIcon
-                    size={12}
-                    className="group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-transform"
-                  />
+                  <ArrowUpRightIcon size={12} />
                 </a>
               </div>
 
               <div className="border border-border-subtle bg-surface/70 p-6 text-center">
-                <p className="text-[10px] tracking-[0.4em] uppercase text-gold mb-3">Horário de Atendimento</p>
-                <p className="text-text-secondary text-sm tracking-wide">Segunda a Sexta · 9h às 18h</p>
-                <p className="text-text-muted text-xs mt-1">Sábado e Domingo · Fechado</p>
+                <p className="text-[13px] tracking-[0.12em] uppercase text-gold mb-3">Horário de Atendimento</p>
+                <p className="text-text-secondary text-base tracking-wide">Segunda a Sexta · 9h às 18h</p>
+                <p className="text-text-muted text-base mt-1">Sábado e Domingo · Fechado</p>
               </div>
             </aside>
+
+            <div className="lg:col-span-7 lg:col-start-1 lg:row-start-1">
+              <div className="border border-border-subtle bg-surface/80 p-5 sm:p-8 md:p-10">
+                <span className="text-[13px] tracking-[0.12em] uppercase text-gold">
+                  Formulário de Contato
+                </span>
+                <div className="mt-8">
+                  <FullContactForm />
+                </div>
+              </div>
+            </div>
           </div>
         </div>
       </main>

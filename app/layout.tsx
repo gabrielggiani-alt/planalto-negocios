@@ -1,3 +1,4 @@
+import RevealOnScroll from "@/components/RevealOnScroll";
 import type { Metadata, Viewport } from "next";
 import "./globals.css";
 import { siteUrl } from "@/lib/site";
@@ -76,6 +77,7 @@ export default function RootLayout({
       </head>
       <body suppressHydrationWarning className="min-h-screen antialiased">
         {children}
+        <RevealOnScroll />
       </body>
     </html>
   );

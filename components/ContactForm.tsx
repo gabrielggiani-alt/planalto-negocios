@@ -34,10 +34,10 @@ export default function ContactForm() {
   return (
     <form
       onSubmit={handleSubmit}
-      className="flex flex-col sm:flex-row gap-3 max-w-xl mx-auto"
+      className="grid sm:grid-cols-[minmax(0,1fr)_auto] gap-3 max-w-xl mx-auto text-left"
       aria-label="Formulário de contato rápido"
     >
-      <label htmlFor="contato-email" className="sr-only">
+      <label htmlFor="contato-email" className="sm:col-span-2 text-base font-medium text-text-secondary">
         Seu e-mail
       </label>
       <input
@@ -49,15 +49,15 @@ export default function ContactForm() {
         value={email}
         onChange={(e) => setEmail(e.target.value)}
         disabled={status === "submitting"}
-        className="flex-1 bg-background/60 border border-border focus:border-gold/70 px-5 py-3.5 text-text placeholder:text-text-muted outline-none transition-colors text-sm tracking-wide"
+        className="w-full min-w-0 bg-background/60 border border-border-strong focus:border-gold/70 px-5 py-3.5 text-text placeholder:text-text-muted transition-colors text-base disabled:opacity-60"
       />
       <button
         type="submit"
         disabled={status === "submitting"}
-        className="group inline-flex items-center justify-center gap-2 px-7 py-3.5 btn-primary text-[12px] tracking-[0.3em] uppercase"
+        className="group inline-flex items-center justify-center gap-2 px-7 py-3.5 btn-primary action-link"
       >
         <span>{status === "submitting" ? "Enviando" : "Enviar"}</span>
-        <ArrowUpRightIcon size={14} className="group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-transform" />
+        <ArrowUpRightIcon size={14} />
       </button>
     </form>
   );

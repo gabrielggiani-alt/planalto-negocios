@@ -51,8 +51,8 @@ export default function FullContactForm({ servico }: { servico?: string } = {}) 
   }
 
   const inputClass =
-    "w-full bg-background/60 border border-border focus:border-gold/70 px-5 py-3.5 text-text placeholder:text-text-muted outline-none transition-colors text-sm tracking-wide";
-  const labelClass = "block text-[11px] tracking-[0.35em] uppercase text-gold mb-2.5";
+    "w-full min-w-0 bg-background/60 border border-border-strong focus:border-gold/70 px-4 py-3.5 text-text placeholder:text-text-muted transition-colors text-base leading-relaxed disabled:opacity-60";
+  const labelClass = "block text-base font-medium text-text-secondary mb-2.5";
 
   return (
     <form
@@ -74,7 +74,7 @@ export default function FullContactForm({ servico }: { servico?: string } = {}) 
       {servico && (
         <div className="flex items-center gap-3 border border-gold-deep/60 bg-gold/5 px-4 py-3">
           <span className="w-1.5 h-1.5 bg-gold rotate-45 shrink-0" aria-hidden="true" />
-          <p className="text-[13px] text-text-secondary">
+          <p className="text-base text-text-secondary">
             Serviço de interesse:{" "}
             <span className="text-gold tracking-wide">{servico}</span>
           </p>
@@ -140,14 +140,14 @@ export default function FullContactForm({ servico }: { servico?: string } = {}) 
           value={fields.mensagem}
           onChange={update("mensagem")}
           disabled={status === "submitting"}
-          className={`${inputClass} resize-none`}
+          className={`${inputClass} resize-y min-h-36`}
         />
       </div>
 
       <button
         type="submit"
         disabled={status === "submitting"}
-        className="group inline-flex items-center justify-center gap-3 px-8 py-4 btn-primary text-[12px] tracking-[0.3em] uppercase"
+        className="group w-full sm:w-auto inline-flex items-center justify-center gap-3 px-8 py-4 btn-primary action-link"
       >
         <span>
           {status === "submitting"
@@ -156,10 +156,7 @@ export default function FullContactForm({ servico }: { servico?: string } = {}) 
               ? "Enviar Solicitação"
               : "Enviar Mensagem"}
         </span>
-        <ArrowUpRightIcon
-          size={14}
-          className="group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-transform"
-        />
+        <ArrowUpRightIcon size={14} />
       </button>
     </form>
   );

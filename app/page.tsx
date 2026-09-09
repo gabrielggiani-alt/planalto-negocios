@@ -2,7 +2,6 @@ import Link from "next/link";
 import Image from "next/image";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
-import Particles from "@/components/Particles";
 import ContactForm from "@/components/ContactForm";
 import ServiceCard from "@/components/ServiceCard";
 import { SERVICOS } from "@/lib/servicos";
@@ -21,11 +20,19 @@ export default function Home() {
     <>
       <Navbar />
 
-      <main className="relative">
+      <main className="public-site relative">
         <Hero />
-        <Services />
-        <AntiFraud />
-        <About />
+
+        {/* Miolo claro: o conteúdo que a pessoa lê para decidir mora no papel.
+            O escuro fica no hero e no fechamento, como moldura. */}
+        <div className="on-paper">
+          <Services />
+          <hr className="rule-gold" aria-hidden="true" />
+          <AntiFraud />
+          <hr className="rule-gold" aria-hidden="true" />
+          <About />
+        </div>
+
         <Contact />
       </main>
 
@@ -36,91 +43,82 @@ export default function Home() {
 
 function Hero() {
   return (
-    <section className="relative min-h-[92vh] overflow-hidden flex items-center pt-[76px]">
+    <section className="relative min-h-[min(680px,86svh)] overflow-hidden flex items-center pt-[76px]">
       <div className="atmosphere" />
+      <div className="guilloche" />
       <div className="light-rays" />
-      <Particles count={12} />
       <div className="vignette" />
       <div className="grain" />
 
-      <div className="absolute top-8 left-8 ornament-corner tl reveal-fade delay-3 pointer-events-none" />
-      <div className="absolute top-8 right-8 ornament-corner tr reveal-fade delay-3 pointer-events-none" />
+      <div aria-hidden="true" className="hidden lg:block absolute top-28 left-8 ornament-corner tl pointer-events-none" />
+      <div aria-hidden="true" className="hidden lg:block absolute top-28 right-8 ornament-corner tr pointer-events-none" />
 
-      <div className="relative z-10 max-w-7xl mx-auto w-full px-6 md:px-12 py-20 grid lg:grid-cols-12 gap-12 items-center">
+      <div className="relative z-10 max-w-7xl mx-auto w-full px-6 md:px-12 pt-14 pb-32 md:pt-20 md:pb-36 grid lg:grid-cols-12 gap-12 items-center">
         <div className="lg:col-span-7 space-y-8">
-          <div className="flex items-center gap-4 reveal-fade delay-1">
+          <div className="flex items-center gap-4">
             <span className="diamond" />
-            <span className="text-[10px] tracking-[0.5em] uppercase text-gold/70">
+            <span className="text-[13px] tracking-[0.12em] uppercase text-gold/70">
               Brasília-DF &middot; Desde 2003
             </span>
           </div>
 
-          <p className="text-text-muted text-[13px] tracking-[0.3em] uppercase reveal-fade delay-2">
+          <p className="text-text-muted text-[13px] tracking-[0.12em] uppercase">
             Bem-vindo à Planalto Negócios
           </p>
 
           <h1
-            className="text-5xl sm:text-6xl lg:text-7xl xl:text-[88px] text-text leading-[1.05] reveal-up delay-2"
+            className="text-[clamp(3.25rem,11vw,7.5rem)] text-text leading-[0.94] text-balance"
             style={{
               fontFamily: "var(--font-serif)",
               fontWeight: 500,
-              letterSpacing: "-0.01em",
+              letterSpacing: "-0.035em",
             }}
           >
-            Solução em <span className="text-gold">consignado</span>.
+            Solução em
+            <br />
+            <span className="text-gold">consignado</span>.
           </h1>
 
           <p
-            className="text-text-secondary text-base md:text-lg leading-relaxed max-w-xl reveal-fade delay-4"
-            style={{ fontFamily: "var(--font-serif)", fontSize: 19, fontWeight: 400 }}
+            className="text-text-secondary text-base md:text-lg leading-relaxed max-w-xl"
           >
             Correspondente bancário dos principais bancos do mercado.
             Crédito consignado para aposentados, pensionistas e servidores
             públicos.
           </p>
 
-          <div className="flex flex-col sm:flex-row gap-4 pt-2 reveal-up delay-5">
+          <div className="flex flex-col sm:flex-row gap-4 pt-2">
             <Link
               href="/contato"
-              className="group inline-flex items-center justify-center gap-3 px-8 py-4 btn-primary text-[12px] tracking-[0.3em] uppercase"
+              className="group inline-flex items-center justify-center gap-3 px-8 py-4 btn-primary action-link"
             >
               <span>Fale Conosco</span>
               <EnvelopeIcon size={16} />
             </Link>
             <Link
               href="/servicos"
-              className="group inline-flex items-center justify-center gap-3 px-8 py-4 border border-gold/60 text-gold text-[12px] tracking-[0.3em] uppercase hover:bg-gold/10 hover:border-gold transition-all"
+              className="group inline-flex items-center justify-center gap-3 px-8 py-4 border border-gold/60 action-link text-gold hover:bg-gold/10 hover:border-gold transition-all"
             >
               <span>Nossos Serviços</span>
-              <ChevronRightIcon size={14} className="group-hover:translate-x-1 transition-transform" />
+              <ChevronRightIcon size={14} />
             </Link>
           </div>
         </div>
 
-        <div className="hidden lg:flex lg:col-span-5 items-center justify-center reveal-fade delay-3">
+        <div className="flex lg:col-span-5 items-center justify-center order-first lg:order-none">
           <HeroEmblem />
         </div>
       </div>
 
-      <a
-        href="#servicos"
-        aria-label="Rolar para serviços"
-        className="absolute left-1/2 -translate-x-1/2 bottom-8 flex flex-col items-center gap-2 text-text-muted hover:text-gold transition-colors group"
-      >
-        <span className="text-[9px] tracking-[0.5em] uppercase">Explore</span>
-        <span className="block w-px h-8 bg-gold-dim group-hover:bg-gold transition-colors" />
-      </a>
     </section>
   );
 }
 
 function HeroEmblem() {
   return (
-    <div className="relative w-[360px] h-[360px] flex items-center justify-center">
+    <div className="hero-emblem relative w-[164px] h-[164px] sm:w-[210px] sm:h-[210px] lg:w-[280px] lg:h-[280px] xl:w-[320px] xl:h-[320px] flex items-center justify-center">
       <div className="absolute inset-0 border border-gold-deep rotate-45" />
-      <div className="absolute inset-6 border border-gold-dim/60 rotate-45" />
-      <div className="absolute inset-12 border border-gold-deep" />
-      <div className="absolute inset-20 border border-gold/40" />
+      <div className="absolute inset-5 border border-gold/25" />
 
       <div className="relative text-center">
         <Image
@@ -129,14 +127,14 @@ function HeroEmblem() {
           width={170}
           height={170}
           priority
-          style={{ width: 170, height: "auto" }}
+          className="w-[86px] sm:w-[112px] lg:w-[170px] h-auto"
         />
-        <div className="mt-5 flex items-center justify-center gap-3">
-          <span className="h-px w-8 bg-gold-dim" />
-          <span className="text-[9px] tracking-[0.5em] uppercase text-gold/70">
+        <div className="mt-3 lg:mt-5 flex items-center justify-center gap-3">
+          <span className="h-px w-5 lg:w-8 bg-gold-dim" />
+          <span className="text-[11px] lg:text-[13px] tracking-[0.12em] uppercase text-gold/70">
             Est. 2003
           </span>
-          <span className="h-px w-8 bg-gold-dim" />
+          <span className="h-px w-5 lg:w-8 bg-gold-dim" />
         </div>
       </div>
     </div>
@@ -147,7 +145,7 @@ function SectionEyebrow({ label }: { label: string }) {
   return (
     <div className="flex items-center justify-center gap-4 mb-6">
       <span className="h-px w-10 bg-gold-dim" />
-      <span className="text-[10px] tracking-[0.6em] uppercase text-gold">
+      <span className="text-[13px] tracking-[0.12em] uppercase text-gold">
         {label}
       </span>
       <span className="h-px w-10 bg-gold-dim" />
@@ -159,10 +157,10 @@ function Services() {
   return (
     <section
       id="servicos"
-      className="relative py-28 md:py-36 px-6 md:px-12 bg-surface/30"
+      className="relative py-20 md:py-28 px-6 md:px-12"
     >
       <div className="max-w-7xl mx-auto">
-        <header className="text-center mb-20">
+        <header className="rise text-center mb-12 md:mb-16">
           <SectionEyebrow label="O Que Oferecemos" />
           <h2
             className="text-4xl md:text-5xl lg:text-6xl text-text leading-tight max-w-3xl mx-auto"
@@ -172,26 +170,37 @@ function Services() {
           </h2>
         </header>
 
-        <div className="grid md:grid-cols-3 gap-6 lg:gap-8">
+        {/* Grade assimétrica: o primeiro serviço ocupa mais e os outros dois
+            se apoiam nele. Três colunas idênticas é o layout mais previsível
+            que existe, e é o que faz uma página parecer template. */}
+        <div className="rise grid gap-6 lg:gap-8 lg:grid-cols-12 lg:[grid-auto-rows:1fr]">
           {SERVICOS.map((s, i) => (
-            <ServiceCard
+            <div
               key={s.slug}
-              number={s.numero}
-              href={`/servicos/${s.slug}`}
-              title={s.titulo}
-              description={s.resumo}
-              icon={<ServiceMark>{ALGARISMOS[i]}</ServiceMark>}
-            />
+              className={
+                i === 0
+                  ? "lg:col-span-7 lg:row-span-2"
+                  : "lg:col-span-5"
+              }
+            >
+              <ServiceCard
+                number={s.numero}
+                href={`/servicos/${s.slug}`}
+                title={s.titulo}
+                description={s.resumo}
+                icon={<ServiceMark>{ALGARISMOS[i]}</ServiceMark>}
+              />
+            </div>
           ))}
         </div>
 
-        <div className="mt-14 text-center">
+        <div className="rise mt-14 text-center">
           <Link
             href="/servicos"
-            className="group inline-flex items-center gap-2 text-gold text-[11px] tracking-[0.3em] uppercase hover:text-gold-light transition-colors"
+            className="group action-link inline-flex items-center gap-2 text-gold hover:text-gold-light transition-colors"
           >
             <span>Ver todos os serviços</span>
-            <ChevronRightIcon size={14} className="group-hover:translate-x-1 transition-transform" />
+            <ChevronRightIcon size={14} />
           </Link>
         </div>
       </div>
@@ -204,7 +213,7 @@ function ServiceMark({ children }: { children: React.ReactNode }) {
     <span
       className="inline-flex items-center justify-center w-10 h-10 border border-current"
       style={{
-        fontFamily: "var(--font-display)",
+        fontFamily: "var(--font-body)",
         fontSize: 18,
         letterSpacing: "0.05em",
       }}
@@ -216,9 +225,9 @@ function ServiceMark({ children }: { children: React.ReactNode }) {
 
 function AntiFraud() {
   return (
-    <section className="relative py-20 md:py-24 px-6 md:px-12 bg-surface-elevated/60">
+    <section className="relative py-20 md:py-24 px-6 md:px-12">
       <div className="max-w-5xl mx-auto">
-        <div className="relative border border-gold/40 bg-surface/85 p-10 md:p-14 overflow-hidden">
+        <div className="rise surface-raised relative border-gold/40 p-6 sm:p-8 md:p-12 overflow-hidden">
           <span aria-hidden="true" className="absolute top-0 left-0 w-16 h-px bg-gold" />
           <span aria-hidden="true" className="absolute top-0 left-0 w-px h-16 bg-gold" />
           <span aria-hidden="true" className="absolute bottom-0 right-0 w-16 h-px bg-gold" />
@@ -229,7 +238,7 @@ function AntiFraud() {
               <ShieldIcon size={32} />
             </div>
             <div className="flex-1 space-y-4">
-              <p className="text-[10px] tracking-[0.5em] uppercase text-gold">
+              <p className="text-[13px] tracking-[0.12em] uppercase text-gold">
                 Alerta de Segurança
               </p>
               <h2
@@ -238,17 +247,17 @@ function AntiFraud() {
               >
                 A Planalto Negócios não cobra pagamento antecipado para liberação de crédito.
               </h2>
-              <p className="text-text-secondary text-[15px] leading-relaxed max-w-2xl">
+              <p className="text-text-secondary text-base leading-relaxed max-w-2xl">
                 Desconfie de contatos suspeitos solicitando depósitos, taxas ou
                 pagamentos prévios em nome da empresa. Em caso de dúvida, entre em
                 contato diretamente pelos canais oficiais informados neste site.
               </p>
               <Link
                 href="/seguranca"
-                className="group inline-flex items-center gap-2 text-gold text-[11px] tracking-[0.3em] uppercase hover:text-gold-light transition-colors pt-1"
+                className="group action-link inline-flex items-center gap-2 text-gold hover:text-gold-light transition-colors pt-1"
               >
                 <span>Saiba mais sobre segurança</span>
-                <ChevronRightIcon size={14} className="group-hover:translate-x-1 transition-transform" />
+                <ChevronRightIcon size={14} />
               </Link>
             </div>
           </div>
@@ -268,13 +277,13 @@ function About() {
   return (
     <section
       id="sobre"
-      className="relative py-28 md:py-36 px-6 md:px-12"
+      className="relative py-16 md:py-24 px-6 md:px-12"
     >
-      <div className="max-w-7xl mx-auto grid lg:grid-cols-12 gap-16 items-center">
+      <div className="rise max-w-7xl mx-auto grid lg:grid-cols-12 gap-16 items-center">
         <div className="lg:col-span-7 space-y-8">
           <div className="flex items-center gap-4">
             <span className="diamond" />
-            <span className="text-[10px] tracking-[0.5em] uppercase text-gold">
+            <span className="text-[13px] tracking-[0.12em] uppercase text-gold">
               Quem Somos
             </span>
           </div>
@@ -284,7 +293,7 @@ function About() {
           >
             Mais de duas décadas atendendo Brasília com seriedade.
           </h2>
-          <div className="space-y-5 text-text-secondary text-[15px] md:text-base leading-relaxed max-w-xl">
+          <div className="space-y-5 text-text-secondary text-base leading-relaxed max-w-xl">
             <p>
               Fundada em 2003, a Planalto Negócios consolidou-se como referência
               no mercado de crédito consignado em Brasília-DF, atuando como
@@ -300,25 +309,25 @@ function About() {
           <div className="pt-2">
             <Link
               href="/sobre"
-              className="group inline-flex items-center gap-2 text-gold text-[11px] tracking-[0.3em] uppercase hover:text-gold-light transition-colors"
+              className="group action-link inline-flex items-center gap-2 text-gold hover:text-gold-light transition-colors"
             >
               <span>Conheça nossa história</span>
-              <ChevronRightIcon size={14} className="group-hover:translate-x-1 transition-transform" />
+              <ChevronRightIcon size={14} />
             </Link>
           </div>
         </div>
 
-        <aside className="lg:col-span-5 lg:pl-12 lg:border-l lg:border-gold-deep">
-          <ul className="space-y-10">
+        <aside className="lg:col-span-5 lg:pl-10 lg:border-l lg:border-border">
+          <ul className="divide-y divide-border">
             {STATS.map((stat) => (
-              <li key={stat.label} className="flex items-baseline gap-6">
+              <li key={stat.label} className="grid grid-cols-[minmax(0,1fr)_minmax(0,1fr)] items-center gap-4 py-6 first:pt-0 last:pb-0">
                 <span
-                  className="text-gold text-5xl md:text-6xl tabular-nums leading-none"
-                  style={{ fontFamily: "var(--font-display)", letterSpacing: "0.02em" }}
+                  className="figure text-gold text-5xl sm:text-6xl lg:text-7xl leading-none"
+                  style={{ fontFamily: "var(--font-display)", letterSpacing: "0.01em" }}
                 >
                   {stat.value}
                 </span>
-                <span className="text-text-muted text-[11px] tracking-[0.4em] uppercase">
+                <span className="text-text-secondary text-base leading-relaxed">
                   {stat.label}
                 </span>
               </li>
@@ -334,9 +343,9 @@ function Contact() {
   return (
     <section
       id="contato"
-      className="relative py-28 md:py-36 px-6 md:px-12 bg-surface-elevated/40 overflow-hidden"
+      className="relative py-16 md:py-24 px-6 md:px-12 overflow-hidden"
     >
-      <div className="relative z-10 max-w-3xl mx-auto text-center space-y-8">
+      <div className="rise relative z-10 max-w-3xl mx-auto text-center space-y-8">
         <SectionEyebrow label="Fale Conosco" />
 
         <h2
@@ -358,7 +367,7 @@ function Contact() {
           >
             <PhoneIcon size={26} className="text-gold shrink-0" />
             <span className="flex flex-col items-start gap-2 leading-none">
-              <span className="text-[11px] tracking-[0.35em] uppercase text-gold/70">
+              <span className="text-sm tracking-[0.08em] uppercase text-gold/70">
                 Ligue para nós
               </span>
               <span
@@ -373,7 +382,7 @@ function Contact() {
 
         <div className="flex items-center gap-4 max-w-xl mx-auto pt-2">
           <span className="h-px flex-1 bg-border-subtle" />
-          <span className="text-[11px] tracking-[0.35em] uppercase text-text-muted">
+          <span className="text-sm tracking-[0.08em] uppercase text-text-muted">
             Ou deixe seu e-mail
           </span>
           <span className="h-px flex-1 bg-border-subtle" />
@@ -383,7 +392,7 @@ function Contact() {
           <ContactForm />
         </div>
 
-        <p className="text-text-muted text-[12px] tracking-[0.25em] uppercase pt-2">
+        <p className="text-text-muted text-base tracking-[0.08em] uppercase pt-2">
           Após inserir seu e-mail, aguarde o contato
         </p>
       </div>

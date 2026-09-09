@@ -16,7 +16,7 @@ export default function ContatoEnviado({ titulo, descricao }: Props) {
       <p className="text-text text-xl mb-3" style={{ fontFamily: "var(--font-serif)" }}>
         {titulo}
       </p>
-      <p className="text-text-muted text-sm leading-relaxed max-w-sm mx-auto">
+      <p className="text-text-muted text-base leading-relaxed max-w-sm mx-auto">
         {descricao}
       </p>
     </div>

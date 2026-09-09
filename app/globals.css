@@ -19,11 +19,14 @@
   --color-text-subtle:       #5C6B96;
 
   /* ── Dourado (primária) ── */
-  --color-gold:              #FFCC33;
-  --color-gold-light:        #FFD966;
-  --color-gold-active:       #E6B82E;
-  --color-gold-dim:          #806619;
-  --color-gold-deep:         #403310;
+  /* O #FFD030 medido no "N" do brasão. A logo já existe em material impresso
+     e não vai mudar, então quem se alinha é o site. Escurecer o dourado do
+     site foi o que deixou a logo parecendo colada de outro lugar. */
+  --color-gold:              #FFD030;
+  --color-gold-light:        #FFDD66;
+  --color-gold-active:       #E6BB2A;
+  --color-gold-dim:          #7A6318;
+  --color-gold-deep:         #3D3110;
 
   /* ── Azul (secundária) ── */
   --color-blue:              #4477FF;
@@ -94,6 +97,59 @@ section[id] {
   cursor: not-allowed;
 }
 
+/* Site público: leitura confortável e superfícies discretas, sem alterar tokens. */
+.public-site { line-height: 1.7; }
+.public-site :is(h1, h2, h3) { text-wrap: balance; }
+.public-site :is(p, li, address) { overflow-wrap: break-word; }
+.public-site :is(.atmosphere, .vignette, .grain) { position: absolute; }
+.public-site .atmosphere { opacity: 0.9; }
+.public-site .vignette { opacity: 0.45; }
+.public-site .grain { opacity: 0.042; }
+
+.action-link {
+  min-height: 48px;
+  font-size: 1rem;
+  font-weight: 500;
+  letter-spacing: 0.02em;
+  text-transform: none;
+  line-height: 1.5;
+}
+.public-footer a { min-height: 44px; }
+
+.site-nav-link {
+  display: inline-flex;
+  align-items: center;
+  min-height: 48px;
+  border-bottom: 2px solid transparent;
+  color: var(--color-text-secondary);
+  font-size: 1rem;
+  font-weight: 500;
+}
+.site-nav-link[aria-current="page"] {
+  border-bottom-color: var(--color-gold);
+  color: var(--color-text);
+}
+.site-nav-link:hover { color: var(--color-gold); }
+
+.public-site input:focus-visible,
+.public-site textarea:focus-visible {
+  outline: 2px solid var(--color-gold);
+  outline-offset: 3px;
+}
+
+/* Única entrada decorativa pública: o brasão assenta 6px, uma vez, sem atraso.
+   Motion Premium: 560ms, desaceleração suave, sem overshoot nem camada ambiente. */
+@keyframes emblem-arrive {
+  from { opacity: 0.65; transform: translateY(6px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+@media (prefers-reduced-motion: no-preference) {
+  .hero-emblem { animation: emblem-arrive 560ms cubic-bezier(0.2, 0, 0, 1) both; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .public-site *, .public-footer *, .site-header * { transition: none !important; }
+}
+
 /* ── Atmospheric background — gradient mesh ── */
 .atmosphere {
   position: fixed;
@@ -101,10 +157,16 @@ section[id] {
   z-index: 0;
   pointer-events: none;
   background:
-    radial-gradient(ellipse 80% 60% at 50% 0%, rgba(255, 204, 51, 0.08) 0%, transparent 60%),
-    radial-gradient(ellipse 60% 80% at 20% 50%, rgba(68, 119, 255, 0.06) 0%, transparent 70%),
-    radial-gradient(ellipse 70% 70% at 80% 70%, rgba(255, 204, 51, 0.05) 0%, transparent 65%),
-    radial-gradient(ellipse 100% 100% at 50% 100%, rgba(10, 21, 64, 0.5) 0%, transparent 70%);
+    /* luz dourada descendo do topo — a fonte de luz do site */
+    radial-gradient(ellipse 90% 55% at 50% -5%, rgba(228, 211, 162, 0.13) 0%, transparent 62%),
+    /* massa azul à esquerda, para o fundo não ser uma cor só */
+    radial-gradient(ellipse 65% 85% at 12% 42%, rgba(68, 119, 255, 0.10) 0%, transparent 72%),
+    /* reflexo dourado baixo à direita, contrapeso da luz de cima */
+    radial-gradient(ellipse 75% 65% at 88% 72%, rgba(201, 175, 112, 0.09) 0%, transparent 66%),
+    /* respiro frio no meio, para o gradiente não ficar uniforme */
+    radial-gradient(ellipse 50% 40% at 62% 28%, rgba(18, 34, 89, 0.55) 0%, transparent 70%),
+    /* base mais densa, assenta o rodapé */
+    radial-gradient(ellipse 120% 90% at 50% 108%, rgba(5, 10, 32, 0.8) 0%, transparent 68%);
 }
 
 /* ── Vignette ── */
@@ -345,4 +407,225 @@ section[id] {
     animation-duration: 0.01ms !important;
     animation-delay: 0s !important;
   }
+}
+
+/* ── Sombra tingida ──────────────────────────────────────────────────────────
+   Sombra preta sobre fundo azul-marinho suja em vez de aprofundar. Estas
+   carregam o azul do próprio fundo, então a profundidade parece pertencer à
+   página. */
+.public-site :is(section, article, aside) { box-shadow: none; }
+
+.surface-raised {
+  background: color-mix(in oklab, var(--color-surface) 88%, transparent);
+  border: 1px solid var(--color-border-subtle);
+  box-shadow:
+    0 1px 0 0 rgba(228, 211, 162, 0.06) inset,
+    0 18px 44px -28px rgba(5, 13, 43, 0.9),
+    0 2px 10px -6px rgba(5, 13, 43, 0.7);
+}
+
+.surface-raised:where(:hover) {
+  border-color: color-mix(in oklab, var(--color-gold) 22%, var(--color-border));
+}
+
+/* ── Faixa de seção ──────────────────────────────────────────────────────────
+   Seções vizinhas com o mesmo fundo criam a parede chapada. Esta alterna a
+   densidade sem introduzir cor nova. */
+.band-deep { background: linear-gradient(180deg, transparent, rgba(5, 10, 32, 0.55) 22%, rgba(5, 10, 32, 0.55) 78%, transparent); }
+
+/* ── Régua dourada ───────────────────────────────────────────────────────────
+   Separador que carrega a marca em vez de uma linha cinza genérica. */
+.rule-gold {
+  height: 1px;
+  border: 0;
+  background: linear-gradient(90deg, transparent, rgba(228, 211, 162, 0.42), transparent);
+}
+
+/* ── Entrada escalonada por scroll ───────────────────────────────────────────
+   A animação anterior existia num lugar só, no desktop, e passava despercebida.
+   Esta acompanha o scroll e vale no celular, que é onde o público está. */
+@media (prefers-reduced-motion: no-preference) {
+  /* Só esconde o que o JavaScript marcou como escondível — e ele só marca o
+     que está abaixo da dobra. Nada some por conta própria. Duas vezes a
+     página ficou em branco porque o CSS escondia primeiro e esperava o
+     observer devolver; agora a ordem é o contrário. */
+  .will-rise {
+    opacity: 0;
+    transform: translateY(64px);
+    transition:
+      opacity 820ms cubic-bezier(0.16, 1, 0.3, 1),
+      transform 1050ms cubic-bezier(0.16, 1, 0.3, 1);
+    will-change: opacity, transform;
+  }
+
+  .will-rise.is-in { opacity: 1; transform: none; }
+
+  /* Os filhos entram em cascata, um atrás do outro. */
+  .will-rise > * {
+    opacity: 0;
+    transform: translateY(40px);
+    transition:
+      opacity 800ms cubic-bezier(0.16, 1, 0.3, 1),
+      transform 900ms cubic-bezier(0.16, 1, 0.3, 1);
+  }
+  .will-rise.is-in > * { opacity: 1; transform: none; }
+  .will-rise.is-in > *:nth-child(1) { transition-delay: 60ms; }
+  .will-rise.is-in > *:nth-child(2) { transition-delay: 150ms; }
+  .will-rise.is-in > *:nth-child(3) { transition-delay: 240ms; }
+  .will-rise.is-in > *:nth-child(4) { transition-delay: 330ms; }
+}
+
+/* ── Guilhoché ───────────────────────────────────────────────────────────────
+   O padrão de linhas finas entrelaçadas de cédula, apólice e certificado de
+   ação. É a linguagem visual de instituição financeira há dois séculos, e diz
+   "documento sério" sem dizer nada. Some no fundo e só aparece de perto, que é
+   exatamente o efeito de papel de segurança.
+
+   Feito em CSS puro: nenhum arquivo para carregar, nítido em qualquer tela. */
+.guilloche {
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  pointer-events: none;
+  opacity: 0.5;
+  background-image:
+    repeating-radial-gradient(circle at 22% 18%,
+      transparent 0 13px, rgba(228, 211, 162, 0.05) 13px 14px, transparent 14px 27px),
+    repeating-radial-gradient(circle at 78% 82%,
+      transparent 0 17px, rgba(228, 211, 162, 0.04) 17px 18px, transparent 18px 35px),
+    repeating-linear-gradient(64deg,
+      transparent 0 21px, rgba(68, 119, 255, 0.035) 21px 22px, transparent 22px 43px);
+  -webkit-mask-image: radial-gradient(ellipse 76% 62% at 50% 42%, #000 12%, transparent 76%);
+          mask-image: radial-gradient(ellipse 76% 62% at 50% 42%, #000 12%, transparent 76%);
+}
+
+/* Numeral com cara de documento financeiro: largura fixa, sem itálico. */
+.figure {
+  font-variant-numeric: tabular-nums lining-nums;
+  letter-spacing: -0.01em;
+}
+
+/* ── Papel ───────────────────────────────────────────────────────────────────
+   Uma faixa clara no meio da página escura.
+
+   O site inteiro era o mesmo azul do topo ao rodapé, e por isso parecia uma
+   cor só — nenhum gradiente resolve isso, porque #050d2b e #0A1540 são quase
+   indistinguíveis. É assim que banco e seguradora trabalham há décadas: o
+   escuro é a autoridade, o claro é onde a informação mora.
+
+   Nenhuma cor nova entra: os tokens são redefinidos DENTRO deste escopo, e o
+   dourado continua sendo a primária. Como os componentes leem as mesmas
+   variáveis, os cards e os textos filhos se adaptam sozinhos. */
+.on-paper {
+  /* Champanhe, não bege neutro: estes tons descem do #E4D3A2 → #C9AF70 do
+     botão primário. O claro passa a pertencer à marca em vez de ser um
+     off-white genérico que serviria a qualquer site. */
+  /* Descem do #FFD030 do "N" do brasão, medido no arquivo da logo. Um bege
+     neutro fica cinza ao lado do dourado da marca, e é isso que fazia a logo
+     e os botões parecerem de outro site. */
+  /* Champanhe dessaturado. O ocre fechado competia com o dourado dos detalhes
+     e cansava a vista — e o público deste site tem 60 anos. O azul é a cor
+     elegante da marca; o claro serve de descanso, não de protagonista. */
+  --color-background:       #DCD4BE;
+  --color-surface:          #E4DDCA;
+  --color-surface-elevated: #EDE7D8;
+  --color-surface-high:     #CEC3A6;
+
+  --color-border-subtle:    #C4B79A;
+  --color-border:           #A99B7C;
+  --color-border-strong:    #877A5E;
+
+  --color-text:             #050d2b;
+  --color-text-secondary:   #24304F;
+  --color-text-muted:       #4A5470;
+  --color-text-subtle:      #6E7691;
+
+  /* O dourado escurece para continuar legível sobre papel: o #FFCC33 sobre
+     claro dá menos de 2:1 e some. Este tom mantém a marca e passa em AA. */
+  --color-gold:             #050d2b;
+  --color-gold-light:       #16234d;
+  --color-gold-active:      #000615;
+  --color-gold-dim:         #B09A62;
+  --color-gold-deep:        #D4BE7C;
+
+  background:
+    radial-gradient(ellipse 70% 50% at 50% 0%, rgba(150, 136, 104, 0.3) 0%, transparent 68%),
+    var(--color-background);
+  color: var(--color-text);
+  position: relative;
+  isolation: isolate;
+}
+
+/* O botão dourado sobre papel vira sólido escuro: o gradiente champanhe
+   desaparece contra o fundo claro. */
+.on-paper .btn-primary {
+  background: linear-gradient(135deg, #050d2b, #16234d);
+  color: #F1E5C3;
+}
+.on-paper .btn-primary:hover { background: linear-gradient(135deg, #16234d, #050d2b); }
+
+/* Emenda entre o escuro e o papel: uma transição de 1 pixel corta seco demais.
+   Estas faixas fazem o papel nascer e morrer dentro do azul. */
+.on-paper::before,
+.on-paper::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  right: 0;
+  height: 190px;
+  pointer-events: none;
+  z-index: 1;
+}
+.on-paper::before {
+  top: 0;
+  background: linear-gradient(180deg,
+    #050d2b 0%, rgba(5, 13, 43, 0.86) 22%, rgba(5, 13, 43, 0.5) 52%, rgba(5, 13, 43, 0.18) 78%, transparent 100%);
+}
+.on-paper::after {
+  bottom: 0;
+  background: linear-gradient(0deg,
+    #050d2b 0%, rgba(5, 13, 43, 0.86) 22%, rgba(5, 13, 43, 0.5) 52%, rgba(5, 13, 43, 0.18) 78%, transparent 100%);
+}
+
+/* O grão fixo do site é claro e some sobre papel; aqui ele escurece. */
+.on-paper > * { position: relative; z-index: 2; }
+.on-paper { padding-block: 40px; }
+main.on-paper { padding-block: 0; }
+main.on-paper::before, main.on-paper::after { height: 160px; }
+
+/* O miolo claro fica acima das camadas fixas de atmosfera, senão o grão e a
+   vinheta do site escuro passam por cima do papel e o deixam encardido. */
+.on-paper {
+  z-index: 3;
+}
+
+/* Grão próprio do papel: escuro em vez de claro, e mais fino. Sem ele o claro
+   fica liso demais e volta a parecer chapado — só que bege. */
+.on-paper::before,
+.on-paper::after { z-index: 3; }
+
+.on-paper > :is(section, div, article) { position: relative; }
+
+/* Textura de papel, discreta: fibras finas em vez de superfície lisa. */
+.on-paper {
+  background-image:
+    radial-gradient(ellipse 70% 50% at 50% 0%, rgba(150, 136, 104, 0.3) 0%, transparent 68%),
+    repeating-linear-gradient(97deg, transparent 0 3px, rgba(5, 13, 43, 0.018) 3px 4px),
+    repeating-linear-gradient(7deg, transparent 0 5px, rgba(5, 13, 43, 0.014) 5px 6px);
+  background-color: var(--color-background);
+}
+
+/* A régua dourada sobre papel precisa do dourado escuro para aparecer. */
+.on-paper .rule-gold {
+  background: linear-gradient(90deg, transparent, rgba(5, 13, 43, 0.3), transparent);
+}
+
+/* A superfície elevada sobre papel: sombra fria e leve, não o poço azul. */
+.on-paper .surface-raised {
+  background: var(--color-surface-elevated);
+  border-color: var(--color-border-subtle);
+  box-shadow:
+    0 1px 0 0 rgba(255, 255, 255, 0.7) inset,
+    0 16px 36px -26px rgba(5, 13, 43, 0.28),
+    0 2px 8px -6px rgba(5, 13, 43, 0.18);
 }

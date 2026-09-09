@@ -14,19 +14,19 @@ export default function ServiceCard({ number, title, description, icon, href }: 
   return (
     <Link
       href={href}
-      className="group relative h-full block p-8 md:p-9 border border-border-subtle bg-surface/80 hover:border-gold/50 hover:bg-surface/90 transition-all duration-500 overflow-hidden"
+      className="group relative h-full flex flex-col p-6 sm:p-8 border border-border bg-surface/80 hover:border-gold/50 hover:bg-surface/90 transition-colors duration-200 overflow-hidden"
     >
       <span
         aria-hidden="true"
-        className="absolute top-0 left-0 w-12 h-px bg-gold-dim group-hover:w-full group-hover:bg-gold transition-all duration-700"
+        className="absolute top-0 left-0 w-12 h-px bg-gold-dim group-hover:bg-gold transition-colors duration-200"
       />
       <span
         aria-hidden="true"
-        className="absolute bottom-0 right-0 w-12 h-px bg-gold-dim group-hover:w-full group-hover:bg-gold transition-all duration-700"
+        className="absolute bottom-0 right-0 w-12 h-px bg-gold-dim group-hover:bg-gold transition-colors duration-200"
       />
 
       <div className="flex items-center justify-between mb-7">
-        <span className="text-[10px] tracking-[0.5em] uppercase text-gold/70 group-hover:text-gold transition-colors">
+        <span className="text-[13px] tracking-[0.12em] uppercase text-gold/70 group-hover:text-gold transition-colors">
           {number}
         </span>
         <span className="text-gold/70 group-hover:text-gold transition-colors">
@@ -41,13 +41,13 @@ export default function ServiceCard({ number, title, description, icon, href }: 
         {title}
       </h3>
 
-      <p className="text-text-muted text-[14px] leading-relaxed mb-8 min-h-[80px]">
+      <p className="text-text-secondary text-base leading-relaxed mb-6">
         {description}
       </p>
 
-      <span className="inline-flex items-center gap-2 text-gold text-[11px] tracking-[0.3em] uppercase">
+      <span className="action-link mt-auto inline-flex items-center gap-2 text-gold">
         <span>Saiba mais</span>
-        <ChevronRightIcon size={14} className="group-hover:translate-x-1 transition-transform" />
+        <ChevronRightIcon size={14} />
       </span>
     </Link>
   );
